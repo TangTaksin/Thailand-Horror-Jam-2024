@@ -3,37 +3,54 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float moveSpeed = 5f; // Speed of player movement
-    public float maxHealth = 100f; // Maximum health of the player
-    public float currentHealth; // Current health of the player
+    public float moveSpeed = 5f;
+    public float maxHealth = 100f;
+    public float currentHealth;
 
-    private Rigidbody2D rb; // Rigidbody component for physics
-    private Vector2 movement; // Movement input vector
-    private Vector3 savePoint; // Save point position
-    private float saveHealth; // Save point health
+    private Rigidbody2D rb;
+    private Vector2 movement;
+    private Vector3 savePoint;
+    private float saveHealth;
+
+    // Hiding Mechanic Variables
+    private bool isHiding = false; // Track if the player is currently hiding
+    private HidingSpot currentHidingSpot; // Reference to the current hiding spot
+
+    // Optionally, use a renderer to change visibility
+    private SpriteRenderer spriteRenderer; // Reference to the sprite renderer
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer
         InitializePlayer();
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleInteractions();
-        HandleUnderLegs();
-        SimulateDamage();
-
-        if (currentHealth <= 0)
+        // Only allow movement and interactions if the player is not hiding
+        if (!isHiding)
         {
-            HandleDeath();
+            HandleMovement();
+            HandleInteractions();
+            HandleUnderLegs();
+            SimulateDamage();
+
+            if (currentHealth <= 0)
+            {
+                HandleDeath();
+            }
+        }
+        else
+        {
+            // Allow the player to exit hiding by pressing E
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ExitHidingSpot(); // Exit hiding if E is pressed
+            }
         }
     }
 
-    /// <summary>
-    /// Initializes the player's attributes.
-    /// </summary>
     private void InitializePlayer()
     {
         currentHealth = maxHealth; // Set full health at the start
@@ -41,9 +58,6 @@ public class PlayerController : MonoBehaviour
         saveHealth = maxHealth; // Initialize save health to max health
     }
 
-    /// <summary>
-    /// Handles player movement based on input.
-    /// </summary>
     private void HandleMovement()
     {
         float moveInput = Input.GetAxis("Horizontal");
@@ -53,21 +67,22 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(moveInput > 0 ? 1 : (moveInput < 0 ? -1 : transform.localScale.x), 1, 1);
     }
 
-    /// <summary>
-    /// Handles player interactions.
-    /// </summary>
     private void HandleInteractions()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Implement interaction logic here
-            Debug.Log("Interacting with object");
+            if (currentHidingSpot != null) // Check if we are near a hiding spot
+            {
+                EnterHidingSpot(currentHidingSpot); // Enter hiding spot
+            }
+            else
+            {
+                // Implement other interaction logic here if not hiding
+                Debug.Log("Interacting with object");
+            }
         }
     }
 
-    /// <summary>
-    /// Handles the "Under the Legs" mechanic.
-    /// </summary>
     private void HandleUnderLegs()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -77,30 +92,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Simulates damage taken for testing purposes.
-    /// </summary>
     private void SimulateDamage()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        // Only allow damage if the player is not hiding
+        if (Input.GetKeyDown(KeyCode.K) && !isHiding)
         {
             TakeDamage(50f); // Example damage
         }
     }
 
-    /// <summary>
-    /// Applies damage to the player.
-    /// </summary>
-    /// <param name="damage">Amount of damage taken.</param>
-    public void TakeDamage(float damage)
+    public void EnterHidingSpot(HidingSpot hidingSpot)
     {
-        currentHealth -= damage;
-        Debug.Log($"Player took damage: {damage}. Current health: {currentHealth}");
+        isHiding = true; // Set hiding state to true
+        currentHidingSpot = hidingSpot; // Store the current hiding spot
+        rb.velocity = Vector2.zero; // Stop player movement
+
+        // Optionally change the player's appearance to indicate hiding
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f); // Make the player semi-transparent
+        Debug.Log(hidingSpot.hidingMessage); // Display hiding message
     }
 
-    /// <summary>
-    /// Handles player death logic.
-    /// </summary>
+    public void ExitHidingSpot()
+    {
+        isHiding = false; // Set hiding state to false
+        spriteRenderer.color = Color.white; // Restore player's appearance
+        Debug.Log("Exited hiding spot");
+        currentHidingSpot = null; // Clear the current hiding spot
+    }
+
+    public void SetCurrentHidingSpot(HidingSpot hidingSpot)
+    {
+        currentHidingSpot = hidingSpot; // Store the current hiding spot
+    }
+
+    public void ClearCurrentHidingSpot()
+    {
+        currentHidingSpot = null; // Clear the current hiding spot
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (!isHiding) // Only take damage if not hiding
+        {
+            currentHealth -= damage;
+            Debug.Log($"Player took damage: {damage}. Current health: {currentHealth}");
+        }
+    }
+
     private void HandleDeath()
     {
         Debug.Log("Player died!");
@@ -108,11 +146,6 @@ public class PlayerController : MonoBehaviour
         SaveSystem.LoadPlayer(gameObject);
     }
 
-    /// <summary>
-    /// Sets the player's save point and health.
-    /// </summary>
-    /// <param name="position">Position to set as the save point.</param>
-    /// <param name="health">Health to set at the save point.</param>
     public void SetSavePoint(Vector3 position, float health)
     {
         savePoint = position;
