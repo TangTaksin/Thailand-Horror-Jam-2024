@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,42 +14,30 @@ public class PlayerController : MonoBehaviour
     private Vector3 savePoint;
     private float saveHealth;
 
-    // Hiding Mechanic Variables
-    private bool isHiding = false; // Track if the player is currently hiding
+    public bool isHiding = false; // Change to public to allow access from other scripts
     private HidingSpot currentHidingSpot; // Reference to the current hiding spot
-
-    // Optionally, use a renderer to change visibility
-    private SpriteRenderer spriteRenderer; // Reference to the sprite renderer
+    private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
+    private int normalSortingOrder; // Variable to store the normal sorting order
+    private bool isUnderLegsMode = false; // Tracks whether Under the Legs mode is active
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
+        normalSortingOrder = spriteRenderer.sortingOrder; // Store the initial sorting order
         InitializePlayer();
     }
 
     void Update()
     {
-        // Only allow movement and interactions if the player is not hiding
-        if (!isHiding)
-        {
-            HandleMovement();
-            HandleInteractions();
-            HandleUnderLegs();
-            SimulateDamage();
+        HandleMovement();
+        SimulateDamage();
+        HandleHiding(); // Call the hiding method
+        HandleUnderLegsMode(); // Handle the Under the Legs mechanic
 
-            if (currentHealth <= 0)
-            {
-                HandleDeath();
-            }
-        }
-        else
+        if (currentHealth <= 0)
         {
-            // Allow the player to exit hiding by pressing E
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ExitHidingSpot(); // Exit hiding if E is pressed
-            }
+            HandleDeath();
         }
     }
 
@@ -60,6 +50,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (isHiding) // Prevent movement while hiding
+        {
+            rb.velocity = Vector2.zero; // Stop player movement when hiding
+            return;
+        }
+
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
@@ -67,82 +63,53 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(moveInput > 0 ? 1 : (moveInput < 0 ? -1 : transform.localScale.x), 1, 1);
     }
 
-    private void HandleInteractions()
+    private void HandleHiding()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (currentHidingSpot != null) // Only allow hiding if in a hiding spot
         {
-            if (currentHidingSpot != null) // Check if we are near a hiding spot
+            if (Input.GetKeyDown(KeyCode.S)) // Check if S key is pressed
             {
-                EnterHidingSpot(currentHidingSpot); // Enter hiding spot
+                isHiding = true; // Set hiding state
+                SetAlpha(0.5f); // Set transparency to 50%
+                spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
+                Debug.Log("Player is hiding in a hiding spot."); // Optional: log to console
             }
-            else
+
+            if (Input.GetKeyUp(KeyCode.S)) // Check if S key is released
             {
-                // Implement other interaction logic here if not hiding
-                Debug.Log("Interacting with object");
+                isHiding = false; // Exit hiding state
+                SetAlpha(1f);
+                spriteRenderer.sortingOrder = normalSortingOrder;
+                Debug.Log("Player is no longer hiding.");
             }
         }
     }
 
-    private void HandleUnderLegs()
+    private void SetAlpha(float alpha)
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            // Implement "Under the Legs" mechanic here
-            Debug.Log("Under the Legs activated");
-        }
+        Color color = spriteRenderer.color; 
+        color.a = alpha; 
+        spriteRenderer.color = color; 
     }
 
     private void SimulateDamage()
     {
-        // Only allow damage if the player is not hiding
-        if (Input.GetKeyDown(KeyCode.K) && !isHiding)
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            TakeDamage(50f); // Example damage
+            TakeDamage(50f);
         }
-    }
-
-    public void EnterHidingSpot(HidingSpot hidingSpot)
-    {
-        isHiding = true; // Set hiding state to true
-        currentHidingSpot = hidingSpot; // Store the current hiding spot
-        rb.velocity = Vector2.zero; // Stop player movement
-
-        // Optionally change the player's appearance to indicate hiding
-        spriteRenderer.color = new Color(1, 1, 1, 0.5f); // Make the player semi-transparent
-        Debug.Log(hidingSpot.hidingMessage); // Display hiding message
-    }
-
-    public void ExitHidingSpot()
-    {
-        isHiding = false; // Set hiding state to false
-        spriteRenderer.color = Color.white; // Restore player's appearance
-        Debug.Log("Exited hiding spot");
-        currentHidingSpot = null; // Clear the current hiding spot
-    }
-
-    public void SetCurrentHidingSpot(HidingSpot hidingSpot)
-    {
-        currentHidingSpot = hidingSpot; // Store the current hiding spot
-    }
-
-    public void ClearCurrentHidingSpot()
-    {
-        currentHidingSpot = null; // Clear the current hiding spot
     }
 
     public void TakeDamage(float damage)
     {
-        if (!isHiding) // Only take damage if not hiding
+        if (!isHiding)
         {
             currentHealth -= damage;
-            Debug.Log($"Player took damage: {damage}. Current health: {currentHealth}");
         }
     }
 
     private void HandleDeath()
     {
-        Debug.Log("Player died!");
-        // Load player data to respawn at the last save point or current data if no save exists
         SaveSystem.LoadPlayer(gameObject);
     }
 
@@ -150,5 +117,43 @@ public class PlayerController : MonoBehaviour
     {
         savePoint = position;
         saveHealth = health;
+    }
+
+    public void EnterHidingSpot(HidingSpot hidingSpot)
+    {
+        currentHidingSpot = hidingSpot;
+        Debug.Log("Entered hiding spot.");
+    }
+
+    public void ExitHidingSpot(HidingSpot hidingSpot)
+    {
+        if (currentHidingSpot == hidingSpot)
+        {
+            currentHidingSpot = null;
+            Debug.Log("Exited hiding spot.");
+        }
+    }
+
+    private void HandleUnderLegsMode()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && !isHiding) 
+        {
+            isUnderLegsMode = true;
+            ToggleVisibility(true);
+            Debug.Log("Under the Legs mode activated.");
+        }
+    }
+
+    private void ToggleVisibility(bool underLegsMode)
+    {
+        foreach (var enemy in FindObjectsOfType<Ghost>())
+        {
+            enemy.ToggleVisibility(underLegsMode);
+        }
+    }
+
+    public bool IsHiding()
+    {
+        return isHiding;
     }
 }
