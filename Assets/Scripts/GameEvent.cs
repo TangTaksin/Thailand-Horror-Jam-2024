@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class GameEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public delegate void GeneralEvent();
+    public static GeneralEvent GamePause;
+    public static GeneralEvent GameResume;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

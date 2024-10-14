@@ -6,6 +6,7 @@ using UnityEngine;
 public class Dialogue : ScriptableObject
 {
     public Message[] messages;
+    public Actor[] actors;
 }
 
 [System.Serializable]
