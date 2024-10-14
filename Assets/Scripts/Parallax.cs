@@ -7,7 +7,7 @@ public class Parallax : MonoBehaviour
     public float parallaxEffectMultiplier; // Adjust this value for the desired parallax effect
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
-    private float textureUnitSizeX;
+    [SerializeField] private float textureUnitSizeX;
 
     void Start()
     {
@@ -19,7 +19,9 @@ public class Parallax : MonoBehaviour
         textureUnitSizeX = spriteRenderer.bounds.size.x; // Get the width of the sprite
     }
 
-    void Update()
+
+
+    void FixedUpdate()
     {
         // Calculate how much the camera has moved
         float deltaX = cameraTransform.position.x - lastCameraPosition.x;
