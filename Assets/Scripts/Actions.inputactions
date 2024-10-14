@@ -20,7 +20,16 @@
                     "id": "7ae0d659-1cb5-4ee0-ba1b-0bb7cf044fb4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "8bc45b64-1710-4c7d-9822-b85b0c7494db",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -70,7 +79,7 @@
                 {
                     "name": "",
                     "id": "fec7ff8f-a513-49bf-83e8-23b2938b3573",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -81,11 +90,22 @@
                 {
                     "name": "",
                     "id": "0b2b774d-502f-48d1-ade5-ac737ac63a0e",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c73838e-1d49-4f86-a409-e9ed9603e142",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

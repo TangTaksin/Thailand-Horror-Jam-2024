@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f98ee91a55c9e49b3bd6386ee38454, type: 3}
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
-  messeges:
+  messages:
+  - actorId: 1
+    message: Oh hey, A!
+  - actorId: 1
+    message: How's your day?
   - actorId: 0
-    messege: 
+    message: Decent.
   - actorId: 0
-    messege: 
-  - actorId: 0
-    messege: 
+    message: Could be better.
+  actors:
+  - name: A
+  - name: B

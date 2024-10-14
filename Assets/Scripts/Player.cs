@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public delegate void PlayerBoolEvent(bool _value);
     public static PlayerBoolEvent ChangePlayerCanActBool;
 
-    [SerializeReference] IInteractable _selectedInteractable;
+    IInteractable _selectedInteractable;
     public IInteractable selectedInteractable
     {
         get { return _selectedInteractable; }
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    [SerializeReference] List<IInteractable> _InteractableList = new List<IInteractable>();
+    List<IInteractable> _InteractableList = new List<IInteractable>();
 /*
     [SerializeReference] ItemData _heldItem;
     public ItemData heldItem
@@ -66,19 +66,14 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        ChangePlayerCanActBool += SetActionBool;
-
+        DialogueManager.DialogueEnd += OnResume;
+        DialogueManager.DialogueCalled += OnPause; 
     }
 
     private void OnDisable()
     {
-        ChangePlayerCanActBool -= SetActionBool;
-
-    }
-
-    void SetActionBool(bool _value)
-    {
-        _canAct = _value;
+        DialogueManager.DialogueEnd -= OnResume;
+        DialogueManager.DialogueCalled -= OnPause;
     }
 
     private void Update()
@@ -92,25 +87,6 @@ public class Player : MonoBehaviour
     {
         _movementSpeed = baseWalkSpeed;
         _body.position += Vector2.right * (_InputAxis * _movementSpeed) * Time.deltaTime;
-
-/*        // Update animation parameters for movement and idle
-        if (_InputVector2 != Vector2.zero)
-        {
-            _animator.SetFloat("Horizontal", _InputVector2.x);
-            _animator.SetFloat("Vertical", _InputVector2.y);
-            _animator.SetFloat("Speed", _InputVector2.sqrMagnitude);
-            //AudioManager.Instance.PlayWalkingSFX();
-
-            // Update the last direction when moving
-            _lastMoveDirection = _InputVector2.normalized;
-        }
-        else
-        {
-            // Player is idle, use the last movement direction
-            _animator.SetFloat("Horizontal", _lastMoveDirection.x);
-            _animator.SetFloat("Vertical", _lastMoveDirection.y);
-            _animator.SetFloat("Speed", 0);  // Set Speed to 0 to trigger idle
-        }*/
     }
 
     public void OnMove(InputValue _value)
@@ -126,6 +102,8 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var interact = collision.GetComponent<IInteractable>();
+
+        print(interact + "entered");
 
         if (interact is IInteractable)
         {
@@ -162,17 +140,17 @@ public class Player : MonoBehaviour
 
         foreach (var interact in _InteractableList)
         {
-            /*if (interact.isInteractable)
-                continue;*/
+            if (!interact.isInteractable)
+                continue;
 
-            //Vector3 DifferenceToTarget = interact..position - currentPosition;
-            //float DistanceToTarget = DifferenceToTarget.sqrMagnitude;
+            Vector3 DifferenceToTarget = interact.position - currentPosition;
+            float DistanceToTarget = DifferenceToTarget.sqrMagnitude;
 
-            /*if (DistanceToTarget < ClosestDistance)
+            if (DistanceToTarget < ClosestDistance)
             {
                 ClosestDistance = DistanceToTarget;
                 selectedInteractable = interact;
-            }*/
+            }
         }
     }
 
@@ -183,53 +161,27 @@ public class Player : MonoBehaviour
 
         _holdingButton = value.isPressed;
 
- /*       if (_selectedInteractable != null)
+        print(string.Format("{0}, {1}", _selectedInteractable, _selectedInteractable != null));
+
+        if (_selectedInteractable != null && _holdingButton)
         {
-            if (_heldItem != null)
-            {
-                var used = false;
-
-                var enoughStamina = (stamina >= heldItem.cost);
-
-                if (enoughStamina)
-                    used = _heldItem.UseItem(_selectedInteractable);
-
-                if (used)
-                {
-                    DrainStamina(_heldItem.cost);
-                    SetItem(null);
-                }
-                else
-                    _selectedInteractable.Interact(this);
-
-            }
-            else
-                _selectedInteractable.Interact(this);
-        }
-*/
-    }
-/*
-    public void SetItem(ItemData _item)
-    {
-        if (heldItem)
-        {
-            if (_item == null)
-            {
-                heldItem = _item;
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.pickUpWrong_sfx);
-            }
-        }
-        else
-        {
-            heldItem = _item;
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.pickUp_sfx);
-
+            _selectedInteractable.Interact();
         }
 
     }
-*/
-    void ResetState(bool _bool)
-    {
 
+    void SetActable(bool _value)
+    {
+        _canAct = _value;
+    }
+
+    void OnPause()
+    {
+        SetActable(false);
+    }
+
+    void OnResume()
+    {
+        SetActable(true);
     }
 }
