@@ -1,24 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public delegate void OnObjectChangeDelegate(object newVal);
+    public static OnObjectChangeDelegate OnInteractableChange;
+
+    public delegate void BoolEvent(bool value);
+    public static BoolEvent HideStateChanged;
+    public static BoolEvent UndertheLegStateChanged;
+
     [Header("Player Settings")]
     public float moveSpeed = 5f;
     public float maxHealth = 100f;
     public float currentHealth;
 
     private Rigidbody2D rb;
-    private Vector2 movement;
+    private float _inputAxis;
     private Vector3 savePoint;
     private float saveHealth;
 
-    public bool isHiding = false; // Change to public to allow access from other scripts
+    bool _canAct;
+
+    IInteractable _selectedInteractable;
+    public IInteractable selectedInteractable
+    {
+        get { return _selectedInteractable; }
+        set
+        {
+            if (_selectedInteractable == value) return;
+
+            _selectedInteractable = value;
+
+            if (OnInteractableChange != null)
+                OnInteractableChange?.Invoke(_selectedInteractable);
+        }
+    }
+
+    List<IInteractable> _InteractableList = new List<IInteractable>();
+
+    bool _isHiding = false;
+    public bool isHiding
+    { 
+        set 
+        { 
+            _isHiding = value;
+            HideStateChanged?.Invoke(_isHiding);
+        }
+        get 
+        {
+            return _isHiding; 
+        }
+    }
+
     private HidingSpot currentHidingSpot; // Reference to the current hiding spot
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private int normalSortingOrder; // Variable to store the normal sorting order
     private bool isUnderLegsMode = false; // Tracks whether Under the Legs mode is active
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
 
     void Start()
     {
@@ -32,13 +82,13 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         SimulateDamage();
-        HandleHiding(); // Call the hiding method
-        HandleUnderLegsMode(); // Handle the Under the Legs mechanic
 
         if (currentHealth <= 0)
         {
             HandleDeath();
         }
+
+        DecideSelectedInteractable();
     }
 
     private void InitializePlayer()
@@ -46,6 +96,13 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth; // Set full health at the start
         savePoint = transform.position; // Initialize save point to the starting position
         saveHealth = maxHealth; // Initialize save health to max health
+    }
+
+    #region Movement
+
+    public void OnMove(InputValue value)
+    {
+        _inputAxis = value.Get<float>();
     }
 
     private void HandleMovement()
@@ -56,26 +113,106 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(_inputAxis * moveSpeed, rb.velocity.y);
 
         // Flip player sprite based on movement direction
-        transform.localScale = new Vector3(moveInput > 0 ? 1 : (moveInput < 0 ? -1 : transform.localScale.x), 1, 1);
+        transform.localScale = new Vector3(_inputAxis > 0 ? 1 : (_inputAxis < 0 ? -1 : transform.localScale.x), 1, 1);
     }
 
-    private void HandleHiding()
+    #endregion
+
+    #region Interact
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        var interact = collision.GetComponent<IInteractable>();
+
+        print(interact + "entered");
+
+        if (interact is IInteractable)
+        {
+            _InteractableList.Add(interact);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        var interact = collision.GetComponent<IInteractable>();
+
+        if (_InteractableList.Contains(interact))
+        {
+            if (_selectedInteractable == interact)
+                selectedInteractable = null;
+
+            _InteractableList.Remove(interact);
+
+        }
+
+        if (_InteractableList.Count == 0)
+        {
+            selectedInteractable = null;
+        }
+    }
+
+    void DecideSelectedInteractable()
+    {
+        if (_InteractableList.Count == 0)
+            return;
+
+        float ClosestDistance = float.MaxValue;
+        Vector3 currentPosition = transform.position;
+
+        foreach (var interact in _InteractableList)
+        {
+            if (!interact.isInteractable)
+                continue;
+
+            Vector3 DifferenceToTarget = interact.position - currentPosition;
+            float DistanceToTarget = DifferenceToTarget.sqrMagnitude;
+
+            if (DistanceToTarget < ClosestDistance)
+            {
+                ClosestDistance = DistanceToTarget;
+                selectedInteractable = interact;
+            }
+        }
+    }
+
+    public void OnInteract(InputValue value)
+    {
+        /*        if (!_canAct)
+                    return;*/
+
+        var _holdingButton = value.isPressed;
+
+        print(string.Format("{0}, {1}", _selectedInteractable, _selectedInteractable != null));
+
+        if (_selectedInteractable != null && _holdingButton)
+        {
+            _selectedInteractable.Interact(this);
+        }
+
+    }
+
+    #endregion
+
+    #region Hiding
+
+    public void OnHide(InputValue value)
+    {
+        var _pressing = value.isPressed;
+
         if (currentHidingSpot != null) // Only allow hiding if in a hiding spot
         {
-            if (Input.GetKeyDown(KeyCode.S)) // Check if S key is pressed
+
+            if (_pressing) // Check if S key is pressed
             {
                 isHiding = true; // Set hiding state
                 SetAlpha(0.5f); // Set transparency to 50%
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
                 Debug.Log("Player is hiding in a hiding spot."); // Optional: log to console
             }
-
-            if (Input.GetKeyUp(KeyCode.S)) // Check if S key is released
+            else
             {
                 isHiding = false; // Exit hiding state
                 SetAlpha(1f);
@@ -85,12 +222,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EnterHidingSpot(HidingSpot hidingSpot)
+    {
+        currentHidingSpot = hidingSpot;
+        Debug.Log("Entered hiding spot.");
+    }
+
+    public void ExitHidingSpot(HidingSpot hidingSpot)
+    {
+        if (currentHidingSpot == hidingSpot)
+        {
+            currentHidingSpot = null;
+            Debug.Log("Exited hiding spot.");
+        }
+    }
+
     private void SetAlpha(float alpha)
     {
-        Color color = spriteRenderer.color; 
-        color.a = alpha; 
-        spriteRenderer.color = color; 
+        Color color = spriteRenderer.color;
+        color.a = alpha;
+        spriteRenderer.color = color;
     }
+
+    public bool IsHiding()
+    {
+        return isHiding;
+    }
+
+    #endregion
+
+    #region Health
 
     private void SimulateDamage()
     {
@@ -113,47 +274,26 @@ public class PlayerController : MonoBehaviour
         SaveSystem.LoadPlayer(gameObject);
     }
 
+    #endregion
+
+    #region Under the legs
+
+    public void OnSpecial()
+    {
+        if (!isHiding)
+        {
+            isUnderLegsMode = !isUnderLegsMode;
+            UndertheLegStateChanged?.Invoke(isUnderLegsMode);
+            Debug.Log("Under the Legs mode activated.");
+        }
+    }
+
+    #endregion
+
     public void SetSavePoint(Vector3 position, float health)
     {
         savePoint = position;
         saveHealth = health;
     }
 
-    public void EnterHidingSpot(HidingSpot hidingSpot)
-    {
-        currentHidingSpot = hidingSpot;
-        Debug.Log("Entered hiding spot.");
-    }
-
-    public void ExitHidingSpot(HidingSpot hidingSpot)
-    {
-        if (currentHidingSpot == hidingSpot)
-        {
-            currentHidingSpot = null;
-            Debug.Log("Exited hiding spot.");
-        }
-    }
-
-    private void HandleUnderLegsMode()
-    {
-        if (Input.GetKeyDown(KeyCode.F) && !isHiding) 
-        {
-            isUnderLegsMode = true;
-            ToggleVisibility(true);
-            Debug.Log("Under the Legs mode activated.");
-        }
-    }
-
-    private void ToggleVisibility(bool underLegsMode)
-    {
-        foreach (var enemy in FindObjectsOfType<Ghost>())
-        {
-            enemy.ToggleVisibility(underLegsMode);
-        }
-    }
-
-    public bool IsHiding()
-    {
-        return isHiding;
-    }
 }
