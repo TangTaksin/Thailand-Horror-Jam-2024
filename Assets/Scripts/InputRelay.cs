@@ -5,17 +5,47 @@ using UnityEngine.InputSystem;
 
 public class InputRelay : MonoBehaviour
 {
-    public delegate void InputEvent(InputValue value);
-    public static InputEvent Interact;
-    public static InputEvent Confirm; 
-
-    public void OnInteract(InputValue value)
+    bool canPlayerInput = true;
+    void Start()
     {
-        Interact?.Invoke(value);
+
+    }
+    public delegate void InputEvent();
+    public static InputEvent Interact;
+    public static InputEvent Confirm;
+
+    // Call this method on input from your Input Actions
+    public void OnInteract()
+    {
+        Interact?.Invoke();
     }
 
-    public void OnConfirm(InputValue value)
+    // Call this method on input from your Input Actions
+    public void OnConfirm()
     {
-        Confirm?.Invoke(value);
-    }    
+        if (canPlayerInput)
+        {
+            Confirm?.Invoke();
+        }
+
+    }
+
+    // This can be connected to an Input Action for button press
+    public void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (canPlayerInput)
+        {
+            if (context.started) // Check if the action has just started
+            {
+                Confirm?.Invoke(); // Notify listeners
+            }
+
+        }
+
+    }
+
+    public void SetPlayerCanInput(bool canInput)
+    {
+        canPlayerInput = canInput;
+    }
 }

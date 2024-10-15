@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 
@@ -18,32 +17,37 @@ public class DialogueManager : MonoBehaviour
     Dialogue currentDialogue;
     int messageIndex;
 
+
     private void OnEnable()
     {
-        InputRelay.Confirm += AdvanceDialogue;
+        InputRelay.Confirm += AdvanceDialogue; // Subscribe to Confirm event
         DialogueTrigger.DialogueTriggered += CallDialogue;
     }
 
     private void OnDisable()
     {
-        InputRelay.Confirm -= AdvanceDialogue;
+        InputRelay.Confirm -= AdvanceDialogue; // Unsubscribe from Confirm event
         DialogueTrigger.DialogueTriggered -= CallDialogue;
     }
 
     void CallDialogue(Dialogue dialogue)
     {
         DialogueCalled?.Invoke();
-
         messageIndex = 0;
-
         currentDialogue = dialogue;
         UpdateMessage();
-
         dialogueBox.SetActive(true);
-
     }
 
-    void EndDialogue()
+    public void StartDialogue(Dialogue dialogue)
+    {
+        currentDialogue = dialogue;
+        messageIndex = 0;
+        dialogueBox.SetActive(true);
+        UpdateMessage();
+    }
+
+    public void EndDialogue()
     {
         dialogueBox.SetActive(false);
         DialogueEnd?.Invoke();
@@ -58,14 +62,13 @@ public class DialogueManager : MonoBehaviour
         messageTxt.text = message_string;
     }
 
-    void AdvanceDialogue(InputValue value)
+    void AdvanceDialogue()
     {
+
         if (!dialogueBox.activeSelf)
             return;
 
-        if (value.isPressed)
-            messageIndex++;
-
+        messageIndex++;
         CheckDialogueProgress();
     }
 
@@ -76,4 +79,5 @@ public class DialogueManager : MonoBehaviour
         else
             EndDialogue();
     }
+
 }
