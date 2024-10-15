@@ -60,3 +60,6 @@ TagManager:
   - name: 5Foreground
     uniqueID: 3124456143
     locked: 0
+  - name: Items
+    uniqueID: 1858656751
+    locked: 0
