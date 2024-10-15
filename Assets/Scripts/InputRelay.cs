@@ -10,39 +10,56 @@ public class InputRelay : MonoBehaviour
     {
 
     }
-    public delegate void InputEvent();
+    public delegate void InputEvent(InputValue value);
+    public static InputEvent Move;
+    public static InputEvent Jump;
     public static InputEvent Interact;
-    public static InputEvent Confirm;
+    public static InputEvent Confirm; 
 
-    // Call this method on input from your Input Actions
-    public void OnInteract()
+    public void OnMove(InputValue value)
     {
-        Interact?.Invoke();
+        Move?.Invoke(value);
     }
 
-    // Call this method on input from your Input Actions
-    public void OnConfirm()
+    public void OnJump(InputValue value)
     {
-        if (canPlayerInput)
-        {
-            Confirm?.Invoke();
-        }
+        Jump?.Invoke(value);
+    }
+
+    public void OnInteract(InputValue value)
+    {
 
     }
 
-    // This can be connected to an Input Action for button press
-    public void OnConfirm(InputAction.CallbackContext context)
-    {
-        if (canPlayerInput)
-        {
-            if (context.started) // Check if the action has just started
-            {
-                Confirm?.Invoke(); // Notify listeners
-            }
+    // // Call this method on input from your Input Actions
+    // public void OnInteract()
+    // {
+    //     Interact?.Invoke();
+    // }
 
-        }
+    // // Call this method on input from your Input Actions
+    // public void OnConfirm()
+    // {
+    //     if (canPlayerInput)
+    //     {
+    //         Confirm?.Invoke();
+    //     }
 
-    }
+    // }
+
+    // // This can be connected to an Input Action for button press
+    // public void OnConfirm(InputAction.CallbackContext context)
+    // {
+    //     if (canPlayerInput)
+    //     {
+    //         if (context.started) // Check if the action has just started
+    //         {
+    //             Confirm?.Invoke(); // Notify listeners
+    //         }
+
+    //     }
+
+    // }
 
     public void SetPlayerCanInput(bool canInput)
     {

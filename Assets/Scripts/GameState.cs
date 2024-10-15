@@ -5,4 +5,5 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public bool isPaused;
+    public int progress;
 }

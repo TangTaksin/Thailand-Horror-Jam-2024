@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
@@ -15,13 +16,15 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [SerializeField] bool _isInteractable;
     public bool isInteractable { get { return _isInteractable; } set { _isInteractable = value; } }
 
+    [SerializeField] public UnityEvent OnDialogueEnd;
+
     private void Start()
     {
         if (playOnStart)
             CallDialogue();
     }
     
-    public void Interact()
+    public void Interact(object obj)
     {
         print("interact with " + name);
         CallDialogue();

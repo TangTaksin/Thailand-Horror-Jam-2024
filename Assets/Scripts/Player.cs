@@ -39,22 +39,7 @@ public class Player : MonoBehaviour
     }
 
     List<IInteractable> _InteractableList = new List<IInteractable>();
-/*
-    [SerializeReference] ItemData _heldItem;
-    public ItemData heldItem
-    {
-        get { return _heldItem; }
-        set
-        {
-            if (_heldItem == value) return;
 
-            _heldItem = value;
-
-            if (OnItemChange != null)
-                OnItemChange?.Invoke(_heldItem);
-        }
-    }
-*/
     float _InputAxis;
     float _facingAxis;
 
@@ -165,7 +150,7 @@ public class Player : MonoBehaviour
 
         if (_selectedInteractable != null && _holdingButton)
         {
-            _selectedInteractable.Interact();
+            _selectedInteractable.Interact(this);
         }
 
     }
@@ -173,6 +158,7 @@ public class Player : MonoBehaviour
     void SetActable(bool _value)
     {
         _canAct = _value;
+        _InputAxis = 0;
     }
 
     void OnPause()
