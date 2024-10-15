@@ -6,60 +6,50 @@ using UnityEngine.InputSystem;
 public class InputRelay : MonoBehaviour
 {
     bool canPlayerInput = true;
-    void Start()
-    {
 
-    }
+    // Delegate for actions that require an InputValue parameter
     public delegate void InputEvent(InputValue value);
+
+    // Delegate for actions that don't require an InputValue parameter
+    public delegate void InputEventNoArgs();
+
+    // Static events with appropriate delegate types
     public static InputEvent Move;
     public static InputEvent Jump;
-    public static InputEvent Interact;
-    public static InputEvent Confirm; 
+    public static InputEventNoArgs Interact;
+    public static InputEventNoArgs Confirm;
 
     public void OnMove(InputValue value)
     {
-        Move?.Invoke(value);
+        Move?.Invoke(value);  // Invoke Move with the InputValue parameter
     }
 
     public void OnJump(InputValue value)
     {
-        Jump?.Invoke(value);
+        Jump?.Invoke(value);  // Invoke Jump with the InputValue parameter
     }
 
-    public void OnInteract(InputValue value)
+    public void OnInteract()
     {
-
+        Interact?.Invoke();  // Invoke Interact without parameters
     }
 
-    // // Call this method on input from your Input Actions
-    // public void OnInteract()
-    // {
-    //     Interact?.Invoke();
-    // }
+    public void OnConfirm()
+    {
+        if (canPlayerInput)
+        {
+            Confirm?.Invoke();  // Invoke Confirm without parameters
+        }
+    }
 
-    // // Call this method on input from your Input Actions
-    // public void OnConfirm()
-    // {
-    //     if (canPlayerInput)
-    //     {
-    //         Confirm?.Invoke();
-    //     }
-
-    // }
-
-    // // This can be connected to an Input Action for button press
-    // public void OnConfirm(InputAction.CallbackContext context)
-    // {
-    //     if (canPlayerInput)
-    //     {
-    //         if (context.started) // Check if the action has just started
-    //         {
-    //             Confirm?.Invoke(); // Notify listeners
-    //         }
-
-    //     }
-
-    // }
+    // This method handles button press input using the InputAction.CallbackContext
+    public void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (canPlayerInput && context.started)  // Check if the action has started
+        {
+            Confirm?.Invoke();  // Invoke Confirm without parameters
+        }
+    }
 
     public void SetPlayerCanInput(bool canInput)
     {

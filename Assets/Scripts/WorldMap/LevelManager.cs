@@ -4,36 +4,32 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject[] levels; // Array to hold all level GameObjects
-    private int currentLevelIndex = 0;
+    [SerializeField] private GameObject[] levels;     // Array of level GameObjects
+    [SerializeField] private Transform[] entryPoints; // Entry points for each level
+    private GameObject player;                        // Reference to the player
 
-    void Start()
+    private void Start()
     {
-        ShowLevel(currentLevelIndex);
+        player = GameObject.FindWithTag("Player"); // Find the player by tag
+        LoadLevel(0);                              // Start at level 0
     }
 
-    public void ShowLevel(int levelIndex)
+    // Load the specified level and move the player to its entry point
+    public void LoadLevel(int levelIndex)
     {
-        // Deactivate all levels
-        foreach (var level in levels)
+        if (levelIndex < 0 || levelIndex >= levels.Length)
         {
-            level.SetActive(false);
+            Debug.LogError("Invalid level index.");
+            return;
         }
 
-        // Activate the current level
-        if (levelIndex >= 0 && levelIndex < levels.Length)
+        // Deactivate all levels except the specified one
+        for (int i = 0; i < levels.Length; i++)
         {
-            levels[levelIndex].SetActive(true);
+            levels[i].SetActive(i == levelIndex);
         }
-    }
 
-    public void NextLevel()
-    {
-        currentLevelIndex++;
-        if (currentLevelIndex >= levels.Length)
-        {
-            currentLevelIndex = 0; // Loop back to the first level
-        }
-        ShowLevel(currentLevelIndex);
+        // Move the player to the entry point for the new level
+        player.transform.position = entryPoints[levelIndex].position;
     }
 }
