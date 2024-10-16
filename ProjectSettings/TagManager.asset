@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Level
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
+  - NPC
   - 
   - 
   - 
@@ -58,9 +59,9 @@ TagManager:
   - name: Player
     uniqueID: 774925989
     locked: 0
-  - name: 5Foreground
-    uniqueID: 3124456143
-    locked: 0
   - name: Items
     uniqueID: 1858656751
+    locked: 0
+  - name: 5Foreground
+    uniqueID: 3124456143
     locked: 0

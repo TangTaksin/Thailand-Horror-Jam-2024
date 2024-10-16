@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MultipleLock : MonoBehaviour
 {
-    public string[] requiredKeyIDs; // Array of required key IDs for this lock (changed to string)
+    public string[] requiredKeyIDs; // Array of required key IDs for this lock
     public GameObject door; // Reference to the door GameObject
+    public FeedbackManager feedbackManager; // Reference to FeedbackManager for showing messages
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,12 +14,15 @@ public class MultipleLock : MonoBehaviour
         {
             if (HasAllKeys())
             {
-                // Unlock the door
+                // Unlock the door and give feedback
                 Unlock();
+                feedbackManager.ShowFeedback("ประตูถูกปลดล็อคแล้ว!"); // "The door is unlocked!"
             }
             else
             {
-                Debug.Log("You don't have all the keys to unlock this door.");
+                // Provide feedback on missing keys
+                string missingKeys = GetMissingKeys();
+                feedbackManager.ShowFeedback("คุณต้องการกุญแจ: " + missingKeys + " เพื่อปลดล็อคประตู."); // "You need keys: <missingKeys> to unlock the door."
             }
         }
     }
@@ -28,12 +32,27 @@ public class MultipleLock : MonoBehaviour
         // Check if the player has all required keys
         foreach (string keyID in requiredKeyIDs)
         {
-            if (!PlayerInventory.instance.HasKey(keyID)) // Check against string keys
+            if (!PlayerInventory.instance.HasKey(keyID))
             {
                 return false;
             }
         }
         return true;
+    }
+
+    private string GetMissingKeys()
+    {
+        // Build a list of missing keys
+        string missingKeys = "";
+        foreach (string keyID in requiredKeyIDs)
+        {
+            if (!PlayerInventory.instance.HasKey(keyID))
+            {
+                if (missingKeys != "") missingKeys += ", "; // Add comma between keys
+                missingKeys += keyID; // Add the missing key ID
+            }
+        }
+        return missingKeys;
     }
 
     private void Unlock()
@@ -44,7 +63,7 @@ public class MultipleLock : MonoBehaviour
 
         // Optionally, play sound or animation here
 
-        // Destroy lock or make it inactive
+        // Destroy or deactivate the lock after unlocking
         Destroy(gameObject);
     }
 }

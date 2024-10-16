@@ -31,7 +31,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     }
 
 
-    void CallDialogue()
+    public void CallDialogue()
     {
         DialogueTriggered?.Invoke(dialogue);
     }

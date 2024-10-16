@@ -214,6 +214,9 @@ MonoBehaviour:
   playOnStart: 0
   dialogue: {fileID: 11400000, guid: 985827e5d5918ac46b9a1608447de6db, type: 2}
   _isInteractable: 1
+  OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &159036990
 Rigidbody2D:
   serializedVersion: 4
@@ -1286,7 +1289,6 @@ MonoBehaviour:
   moveSpeed: 6
   maxHealth: 100
   currentHealth: 0
-  isHiding: 0
 --- !u!114 &837504421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2410,6 +2412,9 @@ MonoBehaviour:
   playOnStart: 0
   dialogue: {fileID: 11400000, guid: 8e70b09cd05722643b03ae62e249fba1, type: 2}
   _isInteractable: 1
+  OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1286149024
 Transform:
   m_ObjectHideFlags: 0
@@ -2459,7 +2464,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1286149023}
           m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-          m_MethodName: Interact
+          m_MethodName: CallDialogue
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3424,6 +3429,9 @@ MonoBehaviour:
   playOnStart: 0
   dialogue: {fileID: 11400000, guid: 985827e5d5918ac46b9a1608447de6db, type: 2}
   _isInteractable: 1
+  OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!70 &2071143654
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
