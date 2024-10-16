@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    public float parallaxEffectMultiplier; // Adjust this value for the desired parallax effect
+    public float baseParallaxEffectMultiplier = 0.1f; // Base multiplier for parallax effect
     public bool canLoop = true; // Variable to toggle looping on/off
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
@@ -25,8 +25,14 @@ public class Parallax : MonoBehaviour
         // Calculate how much the camera has moved
         float deltaX = cameraTransform.position.x - lastCameraPosition.x;
 
+        // Calculate camera speed
+        float cameraSpeed = Mathf.Abs(deltaX); // Get the speed of the camera movement
+
+        // Calculate dynamic parallax multiplier based on camera speed
+        float dynamicParallaxEffectMultiplier = baseParallaxEffectMultiplier * (cameraSpeed / 10f); // Adjust 10f as needed
+
         // Move the background layer with parallax effect
-        transform.position += new Vector3(deltaX * parallaxEffectMultiplier, 0, 0);
+        transform.position += new Vector3(deltaX * dynamicParallaxEffectMultiplier, 0, 0);
 
         // Update the last camera position
         lastCameraPosition = cameraTransform.position;

@@ -19,9 +19,17 @@ public class TriggerGetKey : MonoBehaviour
             else
             {
                 string missingKeys = GetMissingKeys();
-                feedbackManager.ShowFeedback("ต้องการ " + missingKeys + " เพื่อดำเนินการต่อ."); // "You need <keys> to proceed."
+                // Highlight missingKeys in red
+                feedbackManager.ShowFeedback("ต้องการ <color=red>" + missingKeys + "</color> เพื่อดำเนินการต่อ."); // "You need <keys> to proceed."
             }
         }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        string missingKeys = GetMissingKeys();
+        // Highlight missingKeys in red
+        feedbackManager.ShowFeedback("ต้องการ <color=red>" + missingKeys + "</color> เพื่อดำเนินการต่อ."); // "You need <keys> to proceed."
     }
 
     // Check if the player has all the required keys
@@ -57,9 +65,10 @@ public class TriggerGetKey : MonoBehaviour
     {
         // Add the new key to the player's inventory using the string identifier
         PlayerInventory.instance.AddKey(keyToGive);
-        feedbackManager.ShowFeedback("คุณได้รับ " + keyToGive + " !"); // "You have been given <key>!"
+        // Highlight keyToGive in red
+        feedbackManager.ShowFeedback("คุณได้รับ <color=red>" + keyToGive + "</color> !"); // "You have been given <key>!"
 
         // Optional: Destroy this trigger after giving the key
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private int normalSortingOrder; // Variable to store the normal sorting order
     private bool isUnderLegsMode = false; // Tracks whether Under the Legs mode is active
+    public FeedbackManager feedbackManager;
 
     private void OnEnable()
     {
@@ -126,8 +127,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var interact = collision.GetComponent<IInteractable>();
-
-        print(interact + "entered");
+        
 
         if (interact is IInteractable)
         {

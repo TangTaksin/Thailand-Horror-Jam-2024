@@ -1,41 +1,69 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleLock : MonoBehaviour
+public class SingleLock : MonoBehaviour, IInteractable
 {
-    public string requiredKeyID;  // Key ID required to unlock this door (changed to string)
-    public GameObject door;        // Reference to the door GameObject
+    [Header("Lock Settings")]
+    public string requiredKeyID; // Key ID required to unlock this door
+    public GameObject door; // Reference to the door GameObject
     public FeedbackManager feedbackManager; // Reference to the FeedbackManager
+    public Vector3 position => transform.position; // Expression-bodied member for simplicity
 
-    private void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] private bool _isInteractable;
+    public bool isInteractable
     {
-        if (other.CompareTag("Player"))
+        get => _isInteractable;
+        set => _isInteractable = value;
+    }
+
+    // Interact with the lock
+    public void Interact(object interacter)
+    {
+        if (!isInteractable) return;
+
+        if (interacter is PlayerController playerController)
         {
-            // Check if the player has the required key
-            if (PlayerInventory.instance.HasKey(requiredKeyID)) // Use string key
-            {
-                // Unlock the door
-                Unlock();
-            }
-            else
-            {
-                // Show feedback using the FeedbackManager
-                feedbackManager.ShowFeedback("คุณต้องการกุญแจ " + requiredKeyID + " เพื่อปลดล็อกประตูนี้."); // "You need key <keyID> to unlock this door."
-            }
+            AttemptUnlock(playerController.gameObject);
         }
     }
 
+    // Handle the player entering the trigger
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && PlayerInventory.instance.HasKey(requiredKeyID))
+        {
+            feedbackManager.ShowFeedback("กด <color=green>W</color> เพื่อปลดล็อกประตูนี้");
+        }
+        else
+        {
+            
+            feedbackManager.ShowFeedback("กด <color=green>W</color> เพื่อพยายามกระโดดข้าม");
+
+        }
+
+
+
+    }
+
+    // Attempt to unlock the door based on the player's inventory
+    private void AttemptUnlock(GameObject player)
+    {
+        if (PlayerInventory.instance.HasKey(requiredKeyID)) // Check if player has the required key
+        {
+            Unlock();
+        }
+        else
+        {
+            feedbackManager.ShowFeedback($"ต้องการ <color=red>{requiredKeyID}</color> เพื่อปลดล็อกประตูนี้."); // Show key requirement feedback
+        }
+    }
+
+    // Unlock the door
     private void Unlock()
     {
-        // Perform unlock action (for example, destroy or disable the locked door)
-        Debug.Log("ประตูถูกปลดล็อก!"); // "Door unlocked!"
-        feedbackManager.ShowFeedback("ประตูถูกปลดล็อก!"); // Show feedback for unlocking the door
-        door.SetActive(false); // Disabling the door to simulate unlocking
+        feedbackManager.ShowFeedback("ประตูถูกปลดล็อก!"); // Show unlock feedback
+        door.SetActive(false); // Disable the door to simulate unlocking
 
-        // Optionally, play sound or animation here
-
-        // Destroy lock or make it inactive
-        Destroy(gameObject);
+        Destroy(gameObject); // Destroy the lock
     }
 }
