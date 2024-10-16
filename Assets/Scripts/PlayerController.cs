@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private float _inputAxis;
+    float _facingAxis = 1;
     private Vector3 savePoint;
     private float saveHealth;
 
@@ -58,7 +59,11 @@ public class PlayerController : MonoBehaviour
     private HidingSpot currentHidingSpot; // Reference to the current hiding spot
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private int normalSortingOrder; // Variable to store the normal sorting order
+
+    [Header("Under the Leg Setting")]
     private bool isUnderLegsMode = false; // Tracks whether Under the Legs mode is active
+    public float DetectionRadius = 1f;
+    public float DetectionOffset = 1f;
 
     private void OnEnable()
     {
@@ -82,6 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         SimulateDamage();
+        UnderLegProcess();
 
         if (currentHealth <= 0)
         {
@@ -103,11 +109,12 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         _inputAxis = value.Get<float>();
+        _facingAxis = Mathf.Lerp(_facingAxis, _inputAxis, Mathf.Abs(_inputAxis));
     }
 
     private void HandleMovement()
     {
-        if (isHiding) // Prevent movement while hiding
+        if (isHiding || isUnderLegsMode) // Prevent movement while hiding
         {
             rb.velocity = Vector2.zero; // Stop player movement when hiding
             return;
@@ -116,7 +123,11 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(_inputAxis * moveSpeed, rb.velocity.y);
 
         // Flip player sprite based on movement direction
-        transform.localScale = new Vector3(_inputAxis > 0 ? 1 : (_inputAxis < 0 ? -1 : transform.localScale.x), 1, 1);
+        transform.localScale = new Vector3(_facingAxis, 1, 1);
+    }
+
+    public void OnJump()
+    {
     }
 
     #endregion
@@ -288,6 +299,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UnderLegProcess()
+    {
+        if (isUnderLegsMode)
+        {
+            var sphereCast = Physics2D.OverlapCircleAll
+                (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
+                , DetectionRadius);
+
+            Ghost _ghost = null;
+
+            foreach (var col in sphereCast)
+            {
+                col.gameObject.TryGetComponent<Ghost>(out _ghost);
+                if (_ghost)
+                    _ghost.SetBeingSeen();
+            }
+        }
+    }
+
     #endregion
 
     public void SetSavePoint(Vector3 position, float health)
@@ -296,4 +326,10 @@ public class PlayerController : MonoBehaviour
         saveHealth = health;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere
+            (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
+            , DetectionRadius);
+    }
 }

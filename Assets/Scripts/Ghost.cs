@@ -1,169 +1,123 @@
-using System.Collections;
 using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    [Header("Patrol Settings")]
-    public Transform[] patrolPoints;       
-    public float moveSpeed = 2f;           
-    private int currentPointIndex = 0;     
+    SpriteRenderer ghostRenderer;
+    protected Rigidbody2D rigid2d;
+    protected Transform player;
 
-    [Header("Detection Settings")]
-    public float detectionRadius = 5f;     
-    private Transform player;               
-    private bool isChasing = false;         
-    private bool isDetectingPlayer = false; 
+    protected bool _isVanish;
+    protected bool _IsVisible;
+    protected bool _playerHide;
 
-    [Header("Chase Settings")]
-    public float minChaseDelay = 1f;       
-    public float maxChaseDelay = 3f;       
-    private float chaseDelay;               
-
-    [Header("Visibility Settings")]
-    public bool isVisible = false;          
-    public Renderer enemyRenderer;          
-
-    private bool isHiding = false;          
-    private float stopDuration = 3f;        
-    private float stopTime = 0f;            
-    private Vector3 hidingSpot;             
-
-    private void Start()
+    public float detectionRange = 5f;
+    bool playerDetected;
+    protected bool isDetectingPlayer 
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        enemyRenderer.enabled = isVisible;  
-    }
-
-    private void Update()
-    {
-        if (player == null) return; 
-
-        if (!isChasing)
+        get { return playerDetected; }
+        set 
         {
-            Patrol();                   
-            CheckForPlayerDetection();  
-        }
-        else
-        {
-            HandleChasing();           
+            if (playerDetected == value)
+                return;
+
+            playerDetected = value;
+            print("player detected = " + playerDetected);
+            OnPlayerDetected(playerDetected);
         }
     }
 
-    private void Patrol()
+    bool _isSeen;
+    public bool isSeen
     {
-        Transform targetPoint = patrolPoints[currentPointIndex];
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, moveSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, targetPoint.position) < 0.2f)
+        get { return _isSeen; }
+        set
         {
-            currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length; 
+            _isSeen = value;
+            if (isSeen)
+                OnSeen();
         }
     }
+    public float isSeenDecay;
+    float decayTimer;
 
-    private void CheckForPlayerDetection()
+    private void OnEnable()
     {
-        if (isVisible && Vector3.Distance(transform.position, player.position) <= detectionRadius)
-        {
-            if (!isDetectingPlayer)
-            {
-                isDetectingPlayer = true;
-                SetRandomChaseDelay();
-                StartCoroutine(ChaseAfterDelay());
-            }
-        }
+        ghostRenderer = GetComponent<SpriteRenderer>();
+        rigid2d = GetComponent<Rigidbody2D>();
+
+        PlayerController.UndertheLegStateChanged += OnPlayerSpecial;
+        PlayerController.HideStateChanged += OnPlayerHide;
+
+        Initialize();
     }
 
-    private void SetRandomChaseDelay()
+    private void OnDisable()
     {
-        chaseDelay = Random.Range(minChaseDelay, maxChaseDelay);
-        Debug.Log($"Random chase delay set to: {chaseDelay}");
+        PlayerController.UndertheLegStateChanged -= OnPlayerSpecial;
+        PlayerController.HideStateChanged -= OnPlayerHide;
     }
 
-    private IEnumerator ChaseAfterDelay()
+    protected virtual void Initialize()
     {
-        Debug.Log("Ghost has detected the player. Waiting to start chase...");
-        yield return new WaitForSeconds(chaseDelay);
+        if (!player)
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        if (Vector3.Distance(transform.position, player.position) <= detectionRadius)
-        {
-            isChasing = true; 
-            Debug.Log("Ghost has started chasing the player.");
-        }
-
-        isDetectingPlayer = false;
+        SetVisibility(false);
     }
 
-    private void HandleChasing()
+    protected virtual void Update()
     {
-        if (!isVisible)
-        {
-            isChasing = false; 
-            Debug.Log("Ghost stopped chasing because it is invisible.");
-            return; 
-        }
-
-        if (isHiding)
-        {
-            StopAtHidingSpot(); 
-        }
-        else
-        {
-            ChasePlayer(); 
-        }
+        BeingSeenProcess();
+        CheckForPlayerDetection();
+        SpriteUpdate();
     }
 
-    private void ChasePlayer()
+    protected virtual void SpriteUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-
-        var playerController = player.GetComponent<PlayerController>();
-        if (playerController != null && playerController.isHiding)
-        {
-            isHiding = true;             
-            hidingSpot = player.position; 
-        }
-
-        if (Vector3.Distance(transform.position, player.position) > detectionRadius * 1.5f)
-        {
-            isChasing = false; 
-            Debug.Log("Ghost stopped chasing the player because they are out of range.");
-        }
+        var normaVel = rigid2d.velocity.normalized;
+        var xDir = normaVel.x;
+        ghostRenderer.flipX = (xDir < 0);
     }
 
-    private void StopAtHidingSpot()
+    public void SetBeingSeen()
     {
-        transform.position = Vector3.MoveTowards(transform.position, hidingSpot, moveSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, hidingSpot) < 0.2f)
-        {
-            stopTime += Time.deltaTime; 
-            if (stopTime >= stopDuration)
-            {
-                ResetChaseState(); 
-            }
-        }
+        decayTimer = isSeenDecay;
+        isSeen = true;
     }
 
-    private void ResetChaseState()
+    protected virtual void BeingSeenProcess()
     {
-        isVisible = false; 
-        isHiding = false; 
-        stopTime = 0f;    
-        isChasing = false; 
-        enemyRenderer.enabled = isVisible; 
-        Debug.Log("Ghost reset chase state after stopping at the hiding spot.");
+
     }
 
-    public void ToggleVisibility(bool underLegsMode)
+    protected virtual void OnSeen()
     {
-        isVisible = underLegsMode; 
-        enemyRenderer.enabled = isVisible; 
-        Debug.Log($"Ghost visibility toggled: {isVisible}");
+
     }
 
-    private void OnDrawGizmosSelected()
+    protected void CheckForPlayerDetection()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        isDetectingPlayer = (isSeen && Vector3.Distance(transform.position, player.position) <= detectionRange);
+    }
+
+    protected virtual void OnPlayerSpecial(bool value)
+    {
+        SetVisibility(value);
+    }
+
+    void SetVisibility(bool value)
+    {
+        _IsVisible = value;
+        ghostRenderer.enabled = _IsVisible;
+    }
+
+    protected void OnPlayerHide(bool value)
+    {
+        _playerHide = value;
+    }
+
+    protected virtual void OnPlayerDetected(bool value)
+    {
+
     }
 }
