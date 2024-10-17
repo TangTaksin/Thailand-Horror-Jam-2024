@@ -10,6 +10,9 @@ public class Parallax : MonoBehaviour
     private Vector3 lastCameraPosition;
     [SerializeField] private float textureUnitSizeX;
 
+    // Parallax smoothing speed
+    public float smoothFactor = 5f; // Adjust this value for smoothness
+
     void Start()
     {
         cameraTransform = Camera.main.transform; // Get the main camera's transform
@@ -31,8 +34,11 @@ public class Parallax : MonoBehaviour
         // Calculate dynamic parallax multiplier based on camera speed
         float dynamicParallaxEffectMultiplier = baseParallaxEffectMultiplier * (cameraSpeed / 10f); // Adjust 10f as needed
 
-        // Move the background layer with parallax effect
-        transform.position += new Vector3(deltaX * dynamicParallaxEffectMultiplier, 0, 0);
+        // Calculate target position using parallax effect
+        Vector3 targetPosition = transform.position + new Vector3(deltaX * dynamicParallaxEffectMultiplier, 0, 0);
+
+        // Smoothly move the background layer towards the target position
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothFactor * Time.fixedDeltaTime);
 
         // Update the last camera position
         lastCameraPosition = cameraTransform.position;

@@ -8,14 +8,14 @@ public class Door : MonoBehaviour, IInteractable
     public string connect_code;   // Code to identify the door connection
     [SerializeField] public int targetLevelIndex;  // Index of the target level to load when entering the door
 
-    public Vector3 position { get { return transform.position; } }
+ public Vector3 position { get { return transform.position; } }
 
     [SerializeField] bool _isInteractable;
     public bool isInteractable 
     {
         get { return _isInteractable; }
         set { _isInteractable = value; }
-    }
+    }   
 
     public delegate void DoorEvent(object interacter, string connect_code);
     public static DoorEvent DoorEntered;
