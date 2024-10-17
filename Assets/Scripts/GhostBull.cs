@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GhostBull : Ghost
 {
+    Vector3 origin_point;
+    public bool initial_visibility_override = false;
+    public bool initial_visibility = false;
+
     [Header("Patrol Settings")]
     public Transform[] patrolPoints;
     public float moveSpeed = 2f;
@@ -13,18 +17,48 @@ public class GhostBull : Ghost
     public float ChaseDelay = 3f;
     public float maxChaseSpeed = 10f;
     public float chaseAcceleration = 2f;
+
+    public bool disable_on_return;
+    public float return_time = 5f;
+    float return_timer;
+
     Vector2 chaseDir;
 
     bool lockedIn;
 
     public enum State { patrol, prepare, chase}
+    public State initial_state;
     State curState = State.patrol;
+
+    protected override void OnEnable()
+    {
+        origin_point = transform.position;
+        base.OnEnable();
+    }
 
     protected override void Initialize()
     {
-        base.Initialize();
+        if (!player)
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        curState = State.patrol;
+        if (initial_visibility_override)
+            SetVisibility(initial_visibility);
+
+        initial_visibility_override = false;
+        curState = initial_state;
+
+        if (curState == State.prepare)
+        {
+            StartCoroutine(ChaseAfterDelay());
+        }
+        else
+            lockedIn = false;
+    }
+
+    protected void ReturnToOrigin()
+    {
+        transform.position = origin_point;
+        Initialize();
     }
 
     protected override void Update()
@@ -48,6 +82,9 @@ public class GhostBull : Ghost
 
     private void Patrol()
     {
+        if (patrolPoints.Length == 0)
+            return;
+
         Transform targetPoint = patrolPoints[currentPointIndex];
         var dir = targetPoint.position - transform.position;
         dir.Normalize();
@@ -62,18 +99,32 @@ public class GhostBull : Ghost
     private IEnumerator ChaseAfterDelay()
     {
         Debug.Log("Ghost has detected the player. Waiting to start chase...");
+        lockedIn = true;
         curState = State.prepare;
         rigid2d.velocity = Vector2.zero;
-        yield return new WaitForSeconds(ChaseDelay);
 
         chaseDir = player.position - transform.position;
         chaseDir.Normalize();
+        ghostDir = chaseDir.x;
+
+        yield return new WaitForSeconds(ChaseDelay);
+
+        return_timer = 0;
 
         curState = State.chase;
     }
 
     private void ChasePlayer()
     {
+        return_timer += Time.deltaTime;
+        if (return_timer >= return_time)
+        {
+            if (disable_on_return)
+                gameObject.SetActive(false);
+            else
+                ReturnToOrigin();
+        }
+
         if (Mathf.Abs(rigid2d.velocity.x) < maxChaseSpeed)
         {
             rigid2d.velocity += chaseDir * chaseAcceleration * Time.deltaTime;
@@ -85,7 +136,6 @@ public class GhostBull : Ghost
         print("OnPlayerDetected");
         if (value && !lockedIn)
         {
-            lockedIn = true;
             StartCoroutine(ChaseAfterDelay());
         }
     }

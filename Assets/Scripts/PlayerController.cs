@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    public LayerMask groundLayer;
+    bool isGround;
+    public float groundCastLenght;
+    public float jumpforce;
+
     private Rigidbody2D rb;
     private float _inputAxis;
     float _facingAxis = 1;
@@ -61,7 +66,21 @@ public class PlayerController : MonoBehaviour
     private int normalSortingOrder; // Variable to store the normal sorting order
 
     [Header("Under the Leg Setting")]
-    private bool isUnderLegsMode = false; // Tracks whether Under the Legs mode is active
+
+    bool underLeg = false; // Tracks whether Under the Legs mode is active
+    public bool isUnderLegsMode 
+    {
+        get { return underLeg; }
+        set 
+        { 
+            if (underLeg == value)
+                return;
+
+            underLeg = value;
+            UndertheLegStateChanged?.Invoke(underLeg);
+        }
+    }
+
     public float DetectionRadius = 1f;
     public float DetectionOffset = 1f;
 
@@ -86,6 +105,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        CheckGround();
         SimulateDamage();
         UnderLegProcess();
 
@@ -126,8 +146,17 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(_facingAxis, 1, 1);
     }
 
+    void CheckGround()
+    {
+        var groundcast = Physics2D.Raycast(transform.position, Vector2.down, groundCastLenght,groundLayer);
+        isGround = (groundcast);
+
+    }
+
     public void OnJump()
     {
+        if (isGround)
+        rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
     }
 
     #endregion
@@ -212,12 +241,14 @@ public class PlayerController : MonoBehaviour
     public void OnHide(InputValue value)
     {
         var _pressing = value.isPressed;
+        print(_pressing);
 
         if (currentHidingSpot != null) // Only allow hiding if in a hiding spot
         {
 
             if (_pressing) // Check if S key is pressed
             {
+                isUnderLegsMode = false;
                 isHiding = true; // Set hiding state
                 SetAlpha(0.5f); // Set transparency to 50%
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
@@ -295,7 +326,6 @@ public class PlayerController : MonoBehaviour
         {
             isUnderLegsMode = !isUnderLegsMode;
             UndertheLegStateChanged?.Invoke(isUnderLegsMode);
-            Debug.Log("Under the Legs mode activated.");
         }
     }
 
@@ -331,5 +361,8 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere
             (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
             , DetectionRadius);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCastLenght);
     }
+
+
 }

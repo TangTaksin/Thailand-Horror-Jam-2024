@@ -6,9 +6,10 @@ public class Ghost : MonoBehaviour
     protected Rigidbody2D rigid2d;
     protected Transform player;
 
-    protected bool _isVanish;
+    protected bool _isInactive;
     protected bool _IsVisible;
     protected bool _playerHide;
+    protected float ghostDir;
 
     public float detectionRange = 5f;
     bool playerDetected;
@@ -40,7 +41,7 @@ public class Ghost : MonoBehaviour
     public float isSeenDecay;
     float decayTimer;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         ghostRenderer = GetComponent<SpriteRenderer>();
         rigid2d = GetComponent<Rigidbody2D>();
@@ -70,13 +71,16 @@ public class Ghost : MonoBehaviour
         BeingSeenProcess();
         CheckForPlayerDetection();
         SpriteUpdate();
+
+        isSeen = false;
     }
 
     protected virtual void SpriteUpdate()
     {
         var normaVel = rigid2d.velocity.normalized;
         var xDir = normaVel.x;
-        ghostRenderer.flipX = (xDir < 0);
+        ghostDir = Mathf.Lerp(ghostDir, xDir, Mathf.Abs(xDir));
+        ghostRenderer.flipX = (ghostDir < 0);
     }
 
     public void SetBeingSeen()
@@ -105,7 +109,7 @@ public class Ghost : MonoBehaviour
         SetVisibility(value);
     }
 
-    void SetVisibility(bool value)
+    public void SetVisibility(bool value)
     {
         _IsVisible = value;
         ghostRenderer.enabled = _IsVisible;
