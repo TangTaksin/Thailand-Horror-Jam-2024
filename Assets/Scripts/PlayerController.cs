@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 savePoint;
     private float saveHealth;
 
-    bool _canAct;
+    public bool _canAct;
 
     IInteractable _selectedInteractable;
     public IInteractable selectedInteractable
@@ -131,6 +131,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        if (!_canAct)
+            return;
+
         _inputAxis = value.Get<float>();
         _facingAxis = Mathf.Lerp(_facingAxis, _inputAxis, Mathf.Abs(_inputAxis));
     }
@@ -222,8 +225,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        /*        if (!_canAct)
-                    return;*/
+        if (!_canAct)
+           return;
 
         var _holdingButton = value.isPressed;
 
