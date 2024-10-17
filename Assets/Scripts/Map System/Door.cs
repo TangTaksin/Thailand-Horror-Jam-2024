@@ -7,15 +7,15 @@ public class Door : MonoBehaviour, IInteractable
     public Transform destination; // The position where the player will appear in the next level
     public string connect_code;   // Code to identify the door connection
     [SerializeField] public int targetLevelIndex;  // Index of the target level to load when entering the door
-
- public Vector3 position { get { return transform.position; } }
+    [SerializeField] public float delaytransition = 1f;
+    public Vector3 position { get { return transform.position; } }
 
     [SerializeField] bool _isInteractable;
-    public bool isInteractable 
+    public bool isInteractable
     {
         get { return _isInteractable; }
         set { _isInteractable = value; }
-    }   
+    }
 
     public delegate void DoorEvent(object interacter, string connect_code);
     public static DoorEvent DoorEntered;
@@ -52,10 +52,25 @@ public class Door : MonoBehaviour, IInteractable
             // Load the target level and move the player to the destination point
             if (levelManager != null)
             {
-                // Move to the target level and set player's position to the new entry point
-                levelManager.LoadLevel(targetLevelIndex);
-                inter.transform.position = destination.position;
+                StartCoroutine(TransitionWithDelay(inter));
+
             }
         }
+    }
+
+    // Coroutine to add a delay before the transition
+    private IEnumerator TransitionWithDelay(PlayerController player)
+    {
+        player.DisableInput();
+
+        Transition.CalledFadeIn();
+
+        yield return new WaitForSeconds(delaytransition);
+
+        levelManager.LoadLevel(targetLevelIndex);
+
+        player.transform.position = destination.position;
+
+        player.EnableInput();
     }
 }

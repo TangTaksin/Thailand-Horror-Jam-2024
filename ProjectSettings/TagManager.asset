@@ -56,11 +56,11 @@ TagManager:
   - name: 4Midground
     uniqueID: 566669015
     locked: 0
-  - name: Player
-    uniqueID: 774925989
-    locked: 0
   - name: Items
     uniqueID: 1858656751
+    locked: 0
+  - name: Player
+    uniqueID: 774925989
     locked: 0
   - name: 5Foreground
     uniqueID: 3124456143

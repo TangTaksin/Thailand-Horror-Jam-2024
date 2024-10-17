@@ -32,7 +32,7 @@ public class SingleLock : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player") && PlayerInventory.instance.HasKey(requiredKeyID))
         {
-            feedbackManager.ShowFeedback("กด <color=green>W</color> เพื่อปลดล็อกประตูนี้");
+            feedbackManager.ShowFeedback("กด <color=green>W</color> เพื่อปลดล็อก");
         }
         else
         {
@@ -40,9 +40,6 @@ public class SingleLock : MonoBehaviour, IInteractable
             feedbackManager.ShowFeedback("กด <color=green>W</color> เพื่อพยายามกระโดดข้าม");
 
         }
-
-
-
     }
 
     // Attempt to unlock the door based on the player's inventory
@@ -54,14 +51,14 @@ public class SingleLock : MonoBehaviour, IInteractable
         }
         else
         {
-            feedbackManager.ShowFeedback($"ต้องการ <color=red>{requiredKeyID}</color> เพื่อปลดล็อกประตูนี้."); // Show key requirement feedback
+            feedbackManager.ShowFeedback($"ต้องการ <color=red>{requiredKeyID}</color> เพื่อปลดล็อก."); // Show key requirement feedback
         }
     }
 
     // Unlock the door
     private void Unlock()
     {
-        feedbackManager.ShowFeedback("ประตูถูกปลดล็อก!"); // Show unlock feedback
+        feedbackManager.ShowFeedback("ปลดล็อกแล้ว!"); // Show unlock feedback
         door.SetActive(false); // Disable the door to simulate unlocking
 
         Destroy(gameObject); // Destroy the lock

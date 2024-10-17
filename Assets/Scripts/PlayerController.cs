@@ -43,15 +43,15 @@ public class PlayerController : MonoBehaviour
 
     bool _isHiding = false;
     public bool isHiding
-    { 
-        set 
-        { 
+    {
+        set
+        {
             _isHiding = value;
             HideStateChanged?.Invoke(_isHiding);
         }
-        get 
+        get
         {
-            return _isHiding; 
+            return _isHiding;
         }
     }
 
@@ -63,12 +63,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
     {
-        
+
     }
 
     void Start()
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var interact = collision.GetComponent<IInteractable>();
-        
+
 
         if (interact is IInteractable)
         {
@@ -192,6 +192,17 @@ public class PlayerController : MonoBehaviour
             _selectedInteractable.Interact(this);
         }
 
+    }
+
+    public void DisableInput()
+    {
+        _canAct = false; // Prevents the player from acting/moving
+        rb.velocity = Vector2.zero; // Stops the player's movement immediately
+    }
+
+    public void EnableInput()
+    {
+        _canAct = true; // Allows the player to act/move again
     }
 
     #endregion

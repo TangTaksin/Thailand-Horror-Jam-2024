@@ -23,19 +23,28 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -960
-        inSlope: 5046.7266
-        outSlope: 5046.7266
+        value: -1080
+        inSlope: 2700.0063
+        outSlope: 2700.0063
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
+        value: 0.0025482
+        inSlope: 242.76428
+        outSlope: 242.76428
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.00932794
+        outWeight: 0.24480526
       - serializedVersion: 3
-        time: 0.6666667
-        value: 0
+        time: 1
+        value: 0.0025482
         inSlope: 0
         outSlope: 0
-        tangentMode: 136
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -54,18 +63,27 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: -1920
-        inSlope: 10313.194
-        outSlope: 10313.194
-        tangentMode: 0
+        inSlope: 11520
+        outSlope: 11520
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.20396297
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.6666667
-        value: 0
+        time: 0.33333334
+        value: 1920
+        inSlope: 5760
+        outSlope: 5760
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1920
         inSlope: 0
         outSlope: 0
-        tangentMode: 136
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -109,7 +127,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666667
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -131,19 +149,28 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -960
-        inSlope: 5046.7266
-        outSlope: 5046.7266
+        value: -1080
+        inSlope: 2700.0063
+        outSlope: 2700.0063
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
+        value: 0.0025482
+        inSlope: 242.76428
+        outSlope: 242.76428
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.00932794
+        outWeight: 0.24480526
       - serializedVersion: 3
-        time: 0.6666667
-        value: 0
+        time: 1
+        value: 0.0025482
         inSlope: 0
         outSlope: 0
-        tangentMode: 136
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -162,18 +189,27 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: -1920
-        inSlope: 10313.194
-        outSlope: 10313.194
-        tangentMode: 0
+        inSlope: 11520
+        outSlope: 11520
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.20396297
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.6666667
-        value: 0
+        time: 0.33333334
+        value: 1920
+        inSlope: 5760
+        outSlope: 5760
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1920
         inSlope: 0
         outSlope: 0
-        tangentMode: 136
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -189,7 +225,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6666667
+  - time: 1
     functionName: FinishFadeIn
     data: 
     objectReferenceParameter: {fileID: 0}
