@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutScene/CutScene1.unity
     guid: 591db7d4757fa1341a02f37c3132863d
+  - enabled: 1
+    path: Assets/Scenes/MainScene/BossRoom.unity
+    guid: aba4e0b634b80694497fae81ab4b4f07
+  - enabled: 1
+    path: Assets/Scenes/MainScene/Credit Scene.unity
+    guid: b209bbaaf266d2042bb0ceebd25d1c3a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8232be323fb2d024bb0cc0bb808b9db4, type: 3}
