@@ -17,8 +17,14 @@ public class PlayerController : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    public LayerMask groundLayer;
+    bool isGround;
+    public float groundCastLenght;
+    public float jumpforce;
+
     private Rigidbody2D rb;
     private float _inputAxis;
+    float _facingAxis = 1;
     private Vector3 savePoint;
     private float saveHealth;
 
@@ -58,8 +64,28 @@ public class PlayerController : MonoBehaviour
     private HidingSpot currentHidingSpot; // Reference to the current hiding spot
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private int normalSortingOrder; // Variable to store the normal sorting order
-    private bool isUnderLegsMode = false; // Tracks whether Under the Legs mode is active
+    
     public FeedbackManager feedbackManager;
+
+    [Header("Under the Leg Setting")]
+
+    bool underLeg = false; // Tracks whether Under the Legs mode is active
+    public bool isUnderLegsMode 
+    {
+        get { return underLeg; }
+        set 
+        { 
+            if (underLeg == value)
+                return;
+
+            underLeg = value;
+            UndertheLegStateChanged?.Invoke(underLeg);
+        }
+    }
+
+    public float DetectionRadius = 1f;
+    public float DetectionOffset = 1f;
+
 
     private void OnEnable()
     {
@@ -82,7 +108,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        CheckGround();
         SimulateDamage();
+        UnderLegProcess();
 
         if (currentHealth <= 0)
         {
@@ -104,11 +132,12 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         _inputAxis = value.Get<float>();
+        _facingAxis = Mathf.Lerp(_facingAxis, _inputAxis, Mathf.Abs(_inputAxis));
     }
 
     private void HandleMovement()
     {
-        if (isHiding) // Prevent movement while hiding
+        if (isHiding || isUnderLegsMode) // Prevent movement while hiding
         {
             rb.velocity = Vector2.zero; // Stop player movement when hiding
             return;
@@ -117,7 +146,20 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(_inputAxis * moveSpeed, rb.velocity.y);
 
         // Flip player sprite based on movement direction
-        transform.localScale = new Vector3(_inputAxis > 0 ? 1 : (_inputAxis < 0 ? -1 : transform.localScale.x), 1, 1);
+        transform.localScale = new Vector3(_facingAxis, 1, 1);
+    }
+
+    void CheckGround()
+    {
+        var groundcast = Physics2D.Raycast(transform.position, Vector2.down, groundCastLenght,groundLayer);
+        isGround = (groundcast);
+
+    }
+
+    public void OnJump()
+    {
+        if (isGround)
+        rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
     }
 
     #endregion
@@ -212,12 +254,14 @@ public class PlayerController : MonoBehaviour
     public void OnHide(InputValue value)
     {
         var _pressing = value.isPressed;
+        print(_pressing);
 
         if (currentHidingSpot != null) // Only allow hiding if in a hiding spot
         {
 
             if (_pressing) // Check if S key is pressed
             {
+                isUnderLegsMode = false;
                 isHiding = true; // Set hiding state
                 SetAlpha(0.5f); // Set transparency to 50%
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
@@ -295,7 +339,25 @@ public class PlayerController : MonoBehaviour
         {
             isUnderLegsMode = !isUnderLegsMode;
             UndertheLegStateChanged?.Invoke(isUnderLegsMode);
-            Debug.Log("Under the Legs mode activated.");
+        }
+    }
+
+    public void UnderLegProcess()
+    {
+        if (isUnderLegsMode)
+        {
+            var sphereCast = Physics2D.OverlapCircleAll
+                (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
+                , DetectionRadius);
+
+            Ghost _ghost = null;
+
+            foreach (var col in sphereCast)
+            {
+                col.gameObject.TryGetComponent<Ghost>(out _ghost);
+                if (_ghost)
+                    _ghost.SetBeingSeen();
+            }
         }
     }
 
@@ -306,5 +368,14 @@ public class PlayerController : MonoBehaviour
         savePoint = position;
         saveHealth = health;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere
+            (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
+            , DetectionRadius);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCastLenght);
+    }
+
 
 }

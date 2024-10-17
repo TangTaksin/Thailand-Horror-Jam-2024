@@ -34,18 +34,18 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "0b473663-6b15-4f9a-a6db-092f9b4db2a0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Hide",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "6caedc83-3121-4265-8a8a-09eda4a68c72",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
