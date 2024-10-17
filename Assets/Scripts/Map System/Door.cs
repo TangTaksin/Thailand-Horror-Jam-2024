@@ -33,6 +33,11 @@ public class Door : MonoBehaviour, IInteractable
         DoorEntered -= OnEnterDoor;
     }
 
+    public void SetInteractable(bool state)
+    {
+        isInteractable = state;
+    }
+
     // Interaction method
     public void Interact(object _interacter)
     {

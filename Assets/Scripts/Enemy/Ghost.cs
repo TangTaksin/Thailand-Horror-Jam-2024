@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ghost : MonoBehaviour
 {
@@ -34,12 +35,15 @@ public class Ghost : MonoBehaviour
         set
         {
             _isSeen = value;
-            if (isSeen)
-                OnSeen();
+            OnSeen();
         }
     }
+
+    public bool seenDecayActive; 
     public float isSeenDecay;
     float decayTimer;
+
+    public UnityEvent OnSeenEvent, OnUnseenEvent;
 
     protected virtual void OnEnable()
     {
@@ -63,7 +67,7 @@ public class Ghost : MonoBehaviour
         if (!player)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        SetVisibility(false);
+        isSeen = false;
     }
 
     protected virtual void Update()
@@ -71,8 +75,6 @@ public class Ghost : MonoBehaviour
         BeingSeenProcess();
         CheckForPlayerDetection();
         SpriteUpdate();
-
-        isSeen = false;
     }
 
     protected virtual void SpriteUpdate()
@@ -85,18 +87,40 @@ public class Ghost : MonoBehaviour
 
     public void SetBeingSeen()
     {
-        decayTimer = isSeenDecay;
         isSeen = true;
     }
 
     protected virtual void BeingSeenProcess()
     {
+        
 
+        if (isSeen && seenDecayActive)
+        {
+            print("being seen progress is running");
+
+            decayTimer -= Time.deltaTime;
+
+            if (decayTimer <= 0)
+            {
+                isSeen = false;
+            }
+        }
+        
+        SetVisibility();
     }
 
     protected virtual void OnSeen()
     {
-
+        if (isSeen)
+        {
+            print("Seen by player");
+            decayTimer = isSeenDecay;
+            OnSeenEvent?.Invoke();
+        }
+        else
+        {
+            OnUnseenEvent?.Invoke();
+        }
     }
 
     protected void CheckForPlayerDetection()
@@ -106,13 +130,13 @@ public class Ghost : MonoBehaviour
 
     protected virtual void OnPlayerSpecial(bool value)
     {
-        SetVisibility(value);
+
     }
 
-    public void SetVisibility(bool value)
+    public void SetVisibility()
     {
-        _IsVisible = value;
-        ghostRenderer.enabled = _IsVisible;
+        var eval = decayTimer / isSeenDecay;
+        ghostRenderer.color = new Color(1, 1, 1, eval);
     }
 
     protected void OnPlayerHide(bool value)

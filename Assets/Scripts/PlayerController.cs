@@ -360,6 +360,8 @@ public class PlayerController : MonoBehaviour
                 col.gameObject.TryGetComponent<Ghost>(out _ghost);
                 if (_ghost)
                     _ghost.SetBeingSeen();
+
+                print(col);
             }
         }
     }

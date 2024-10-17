@@ -7,12 +7,21 @@ public class ShowDisplayName : MonoBehaviour
     public FeedbackManager feedbackManager; // Reference to the FeedbackManager
     public bool isNPC; // Boolean to determine if the feedback is for an NPC
     public bool isItem; // Boolean to determine if the feedback is for an item
+    public bool displayable;
 
     private bool playerInRange = false; // Tracks if the player is within the trigger's range
+
+    public void SetDisplayable(bool value)
+    {
+        displayable = value;
+    }
 
     // Check if the player enters the trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!displayable)
+            return;
+
         if (collision.CompareTag("Player") && !playerInRange)
         {
             playerInRange = true; // Set playerInRange to true

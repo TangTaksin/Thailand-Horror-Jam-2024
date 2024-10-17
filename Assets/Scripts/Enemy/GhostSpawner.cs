@@ -14,17 +14,15 @@ public class GhostSpawner : MonoBehaviour
 
     float res_timer;
     bool instance_isInactive;
-    bool player_special_actived;
 
     private void OnEnable()
     {
         initialize();
-        PlayerController.UndertheLegStateChanged += UpdateVisibleState;
     }
 
     private void OnDisable()
     {
-        PlayerController.UndertheLegStateChanged -= UpdateVisibleState;
+
     }
 
     void initialize()
@@ -69,18 +67,9 @@ public class GhostSpawner : MonoBehaviour
         }
 
         ghost_instance.transform.position = transform.position;
-
-        var ghost_comp = ghost_instance.GetComponent<Ghost>();
-
         ghost_instance.SetActive(true);
-        ghost_comp.SetVisibility(player_special_actived);
         res_timer = 0;
 
         respawn_seconds = Random.Range(respawn_seconds_min, respawn_seconds_max);
-    }
-
-    void UpdateVisibleState(bool state)
-    {
-        player_special_actived = state;
     }
 }

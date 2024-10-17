@@ -5,8 +5,6 @@ using UnityEngine;
 public class GhostBull : Ghost
 {
     Vector3 origin_point;
-    public bool initial_visibility_override = false;
-    public bool initial_visibility = false;
 
     [Header("Patrol Settings")]
     public Transform[] patrolPoints;
@@ -38,13 +36,8 @@ public class GhostBull : Ghost
 
     protected override void Initialize()
     {
-        if (!player)
-            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        base.Initialize();
 
-        if (initial_visibility_override)
-            SetVisibility(initial_visibility);
-
-        initial_visibility_override = false;
         curState = initial_state;
 
         if (curState == State.prepare)
@@ -75,7 +68,7 @@ public class GhostBull : Ghost
         switch (curState)
         {
             case State.patrol: Patrol(); break;
-            case State.prepare: break;
+            case State.prepare: Prepare(); break;
             case State.chase: ChasePlayer(); break;
         }
     }
@@ -96,16 +89,21 @@ public class GhostBull : Ghost
         }
     }
 
+    void Prepare()
+    {
+
+        chaseDir = player.position - transform.position;
+        chaseDir.Normalize();
+        ghostDir = chaseDir.x;
+
+    }
+
     private IEnumerator ChaseAfterDelay()
     {
         Debug.Log("Ghost has detected the player. Waiting to start chase...");
         lockedIn = true;
         curState = State.prepare;
         rigid2d.velocity = Vector2.zero;
-
-        chaseDir = player.position - transform.position;
-        chaseDir.Normalize();
-        ghostDir = chaseDir.x;
 
         yield return new WaitForSeconds(ChaseDelay);
 

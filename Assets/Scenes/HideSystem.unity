@@ -4272,14 +4272,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: m_SortingLayer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 774925989
-      objectReference: {fileID: 0}
     - target: {fileID: 7483805408606115995, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4359,34 +4351,6 @@ PrefabInstance:
     - target: {fileID: 7483805408606115995, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: _canAct
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: jumpforce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: DetectionOffset
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: DetectionRadius
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: groundCastLenght
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
