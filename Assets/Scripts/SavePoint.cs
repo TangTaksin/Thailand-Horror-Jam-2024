@@ -1,12 +1,12 @@
 using UnityEngine;
 using TMPro; // Include the TextMeshPro namespace
 
-public class SavePoint : MonoBehaviour
+public class SavePoint : MonoBehaviour, IInteractable
 {
     private bool playerInRange = false;
 
-    // Reference to the TextMeshPro component
-    public TextMeshProUGUI statusText;
+    // Reference to the FeedbackManager
+    public FeedbackManager feedbackManager;
 
     // Reference to the SpriteRenderer component
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -16,6 +16,15 @@ public class SavePoint : MonoBehaviour
 
     // Color to revert to when entering the save point
     public Color defaultColor = Color.white; // Change this to your desired default color
+
+    public Vector3 position => transform.position; // Expression-bodied member for position
+
+    [SerializeField] private bool _isInteractable = true; // Default is true for interactable
+    public bool isInteractable
+    {
+        get => _isInteractable;
+        set => _isInteractable = value;
+    }
 
     void Start()
     {
@@ -29,14 +38,21 @@ public class SavePoint : MonoBehaviour
         }
     }
 
-    void Update()
+    // Called when interacting with the save point
+    public void Interact(object interacter)
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))  // Press 'E' to save
+        if (!isInteractable || !playerInRange) return; // Ensure player is in range and object is interactable
+
+        if (interacter is PlayerController playerController)
         {
-            SaveSystem.SavePlayer(GameObject.FindWithTag("Player"));
-            Debug.Log("Game saved at the save point.");
-            UpdateStatusText("Game saved!", savedColor); // Update the status text and change color
-            ChangeSpriteColor(savedColor); // Change sprite color to indicate save
+            // Save the game when the player interacts
+            SaveSystem.SavePlayer(playerController.gameObject);
+
+            // Use FeedbackManager to show save feedback
+            feedbackManager?.ShowFeedback("Game saved!");
+
+            // Change sprite color to indicate save
+            ChangeSpriteColor(savedColor); 
         }
     }
 
@@ -45,8 +61,9 @@ public class SavePoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("Player entered save point range.");
-            UpdateStatusText("Press 'E' to save.", Color.white); // Notify player to save
+
+            // Use FeedbackManager to show interaction prompt
+            feedbackManager?.ShowFeedback("Press 'W' to save.");
         }
     }
 
@@ -55,18 +72,9 @@ public class SavePoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("Player left save point range.");
-            UpdateStatusText("", Color.white); // Clear status text, set to default color
-        }
-    }
 
-    // Method to update the status text
-    private void UpdateStatusText(string message, Color color)
-    {
-        if (statusText != null)
-        {
-            statusText.text = message; // Set the status text to the provided message
-            statusText.color = color; // Change the text color
+            // Clear the feedback message when player leaves the save point
+            feedbackManager?.HideFeedback();
         }
     }
 

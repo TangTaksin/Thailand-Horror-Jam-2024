@@ -17,7 +17,7 @@ public class GhostBull : Ghost
     public float chaseAcceleration = 2f;
 
     public bool disable_on_return;
-    public float return_time = 5f;
+    public float return_time = 30f;
     float return_timer;
 
     Vector2 chaseDir;
