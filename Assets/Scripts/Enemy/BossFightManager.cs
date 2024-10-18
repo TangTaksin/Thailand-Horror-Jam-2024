@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;  // Add this to load scenes
 
 public class BossFightManager : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class BossFightManager : MonoBehaviour
         if (bossProgress >= bossProgressGoal)
         {
             // Boss Clear
+            SceneManager.LoadScene("CutSceneEnd");
         }
     }
 }
