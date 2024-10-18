@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    Animator _animator;
+
     public LayerMask groundLayer;
     bool isGround;
     public float groundCastLenght;
@@ -84,8 +86,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public float DetectionRadius = 1f;
-    public float DetectionOffset = 1f;
+    public Vector2 DetectionOffset;
 
+    public GameObject SpecialOverlay;
+    public GameObject SpecialMask;
 
     private void OnEnable()
     {
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
         normalSortingOrder = spriteRenderer.sortingOrder; // Store the initial sorting order
         InitializePlayer();
@@ -118,6 +123,7 @@ public class PlayerController : MonoBehaviour
         }
 
         DecideSelectedInteractable();
+        HandleAninmation();
     }
 
     private void InitializePlayer()
@@ -131,25 +137,19 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        if (!_canAct)
-            return;
-
         _inputAxis = value.Get<float>();
         _facingAxis = Mathf.Lerp(_facingAxis, _inputAxis, Mathf.Abs(_inputAxis));
     }
 
     private void HandleMovement()
     {
-        if (isHiding || isUnderLegsMode) // Prevent movement while hiding
+        if (isHiding || isUnderLegsMode || !_canAct) // Prevent movement while hiding
         {
             rb.velocity = Vector2.zero; // Stop player movement when hiding
             return;
         }
 
         rb.velocity = new Vector2(_inputAxis * moveSpeed, rb.velocity.y);
-
-        // Flip player sprite based on movement direction
-        transform.localScale = new Vector3(_facingAxis, 1, 1);
     }
 
     void CheckGround()
@@ -347,10 +347,14 @@ public class PlayerController : MonoBehaviour
 
     public void UnderLegProcess()
     {
+        SpecialOverlay.SetActive(isUnderLegsMode);
+
         if (isUnderLegsMode)
         {
+            SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;
+
             var sphereCast = Physics2D.OverlapCircleAll
-                (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
+                (transform.position + (new Vector3(DetectionOffset.x * -_facingAxis, DetectionOffset.y, 0))
                 , DetectionRadius);
 
             Ghost _ghost = null;
@@ -377,10 +381,17 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere
-            (transform.position + (Vector3.right * (DetectionOffset * -_facingAxis))
+            (transform.position + (new Vector3(DetectionOffset.x * -_facingAxis, DetectionOffset.y, 0))
             , DetectionRadius);
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCastLenght);
+
+        if (SpecialOverlay)
+        SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;
     }
 
-
+    void HandleAninmation()
+    {
+        // Flip player sprite based on movement direction
+        transform.localScale = new Vector3(_facingAxis, 1, 1);
+    }
 }

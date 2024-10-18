@@ -10624,6 +10624,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2184550021797917228, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184550021797917228, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1326186862, guid: 04d0cf8f183810c4286a86d75a662292, type: 3}
+    - target: {fileID: 2184550021797917228, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
       propertyPath: m_SortingLayer
       value: 6
       objectReference: {fileID: 0}
@@ -10693,11 +10701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6723396670401101774, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 32.5
+      value: 41.5
       objectReference: {fileID: 0}
     - target: {fileID: 6723396670401101774, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -132
+      value: -131.5
       objectReference: {fileID: 0}
     - target: {fileID: 6723396670401101774, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10714,6 +10722,10 @@ PrefabInstance:
     - target: {fileID: 7383360645699753802, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
       propertyPath: m_Name
       value: Bull Patrol
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842088023772920731, guid: 9723874ccb3a73649a6980da22ea4604, type: 3}
+      propertyPath: moveSpeed
+      value: 1.83
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
