@@ -123,7 +123,8 @@ public class PlayerController : MonoBehaviour
         }
 
         DecideSelectedInteractable();
-        HandleAninmation();
+
+        MovementAnimation();
     }
 
     private void InitializePlayer()
@@ -231,8 +232,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        if (!_canAct)
-            return;
+        if (!_canAct || _isHiding || isUnderLegsMode)
+           return;
 
         var _holdingButton = value.isPressed;
 
@@ -240,6 +241,7 @@ public class PlayerController : MonoBehaviour
 
         if (_selectedInteractable != null && _holdingButton)
         {
+            _animator.Play("nen_jun_interact");
             _selectedInteractable.Interact(this);
         }
 
@@ -274,6 +276,7 @@ public class PlayerController : MonoBehaviour
                 isHiding = true; // Set hiding state
                 SetAlpha(0.5f); // Set transparency to 50%
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
+                _animator.Play("nen_jun_hide");
                 Debug.Log("Player is hiding in a hiding spot."); // Optional: log to console
             }
             else
@@ -281,6 +284,7 @@ public class PlayerController : MonoBehaviour
                 isHiding = false; // Exit hiding state
                 SetAlpha(1f);
                 spriteRenderer.sortingOrder = normalSortingOrder;
+                _animator.SetTrigger("Released");
                 Debug.Log("Player is no longer hiding.");
             }
         }
@@ -335,6 +339,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
+        _animator.Play("nen_jun_ded");
+
         SaveSystem.LoadPlayer(gameObject);
     }
 
@@ -347,6 +353,11 @@ public class PlayerController : MonoBehaviour
         if (!isHiding)
         {
             isUnderLegsMode = !isUnderLegsMode;
+            if (isUnderLegsMode)
+                _animator.Play("nen_jun_looking_through_enter");
+            else
+                _animator.Play("nen_jun_looking_through_exit");
+
             UndertheLegStateChanged?.Invoke(isUnderLegsMode);
         }
     }
@@ -391,13 +402,16 @@ public class PlayerController : MonoBehaviour
             , DetectionRadius);
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCastLenght);
 
-        if (SpecialOverlay)
-            SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;
+/*        if (SpecialOverlay)
+        SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;*/
     }
 
-    void HandleAninmation()
+    void MovementAnimation()
     {
-        // Flip player sprite based on movement direction
         transform.localScale = new Vector3(_facingAxis, 1, 1);
+
+        if (rb.velocity.magnitude > 0)
+            _animator.Play("nen_jun_run");
+
     }
 }
