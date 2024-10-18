@@ -7,7 +7,8 @@ public class ShowDisplayName : MonoBehaviour
     public FeedbackManager feedbackManager; // Reference to the FeedbackManager
     public bool isNPC; // Boolean to determine if the feedback is for an NPC
     public bool isItem; // Boolean to determine if the feedback is for an item
-    public bool displayable;
+    public bool displayable = true;
+    public bool isInfo;
 
     private bool playerInRange = false; // Tracks if the player is within the trigger's range
 
@@ -52,6 +53,11 @@ public class ShowDisplayName : MonoBehaviour
         else if (isItem)
         {
             return $"=== {displayName} ===\nPress <color=green>W</color> to Pick Up";
+        }
+        else if (isInfo)
+        {
+            return $"=== {displayName} ===";
+
         }
         else // Assuming it's a door if neither is true
         {

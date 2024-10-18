@@ -27,7 +27,7 @@ public class SceneChanger : MonoBehaviour, IInteractable
     }
 
     // This method loads the scene normally (replacing the current one)
-    private void LoadScene()
+    public void LoadScene()
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
