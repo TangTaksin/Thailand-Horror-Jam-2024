@@ -929,8 +929,8 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837504415}
-  m_BodyType: 0
-  m_Simulated: 1
+  m_BodyType: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -989,9 +989,9 @@ SpriteRenderer:
   m_SortingLayerID: 774925989
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 1710197241, guid: 6db8f0db92a0c6443b4764fe0c8e0f16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
@@ -1017,7 +1017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.6, y: -1.83}
+  m_AnchoredPosition: {x: -16.484375, y: -1.984375}
   m_SizeDelta: {x: 1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &837504420
@@ -1043,7 +1043,9 @@ MonoBehaviour:
   _canAct: 0
   feedbackManager: {fileID: 0}
   DetectionRadius: 1
-  DetectionOffset: 1
+  DetectionOffset: {x: 0, y: 0}
+  SpecialOverlay: {fileID: 0}
+  SpecialMask: {fileID: 0}
 --- !u!114 &837504421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,7 +1230,7 @@ Transform:
   m_GameObject: {fileID: 894784976}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.6, y: 1.1699997, z: -10}
+  m_LocalPosition: {x: -15.484375, y: 1.0156248, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2292,7 +2294,7 @@ Transform:
   m_GameObject: {fileID: 1775235922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.6, y: 1.1699997, z: -10}
+  m_LocalPosition: {x: -15.484375, y: 1.0156248, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

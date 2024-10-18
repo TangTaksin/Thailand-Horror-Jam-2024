@@ -41,6 +41,7 @@ public class Door : MonoBehaviour, IInteractable
     // Interaction method
     public void Interact(object _interacter)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.interact_sfx);
         DoorEntered -= OnEnterDoor;
         DoorEntered?.Invoke(_interacter, connect_code); // Invoke the door event
         DoorEntered += OnEnterDoor;

@@ -1845,9 +1845,9 @@ SpriteRenderer:
   m_SortingLayerID: 774925989
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 1710197241, guid: 6db8f0db92a0c6443b4764fe0c8e0f16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
@@ -1899,7 +1899,9 @@ MonoBehaviour:
   _canAct: 0
   feedbackManager: {fileID: 0}
   DetectionRadius: 1
-  DetectionOffset: 1
+  DetectionOffset: {x: 0, y: 0}
+  SpecialOverlay: {fileID: 0}
+  SpecialMask: {fileID: 0}
 --- !u!114 &837504421
 MonoBehaviour:
   m_ObjectHideFlags: 0

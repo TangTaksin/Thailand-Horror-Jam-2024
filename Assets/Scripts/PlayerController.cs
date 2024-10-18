@@ -66,17 +66,17 @@ public class PlayerController : MonoBehaviour
     private HidingSpot currentHidingSpot; // Reference to the current hiding spot
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private int normalSortingOrder; // Variable to store the normal sorting order
-    
+
     public FeedbackManager feedbackManager;
 
     [Header("Under the Leg Setting")]
 
     bool underLeg = false; // Tracks whether Under the Legs mode is active
-    public bool isUnderLegsMode 
+    public bool isUnderLegsMode
     {
         get { return underLeg; }
-        set 
-        { 
+        set
+        {
             if (underLeg == value)
                 return;
 
@@ -150,11 +150,17 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.velocity = new Vector2(_inputAxis * moveSpeed, rb.velocity.y);
+        // Play walking sound if the player is moving
+        if (Mathf.Abs(_inputAxis) > 0.1f) // Check if there is significant input
+        {
+            AudioManager.Instance.PlayWalkingSFX();
+            
+        }
     }
 
     void CheckGround()
     {
-        var groundcast = Physics2D.Raycast(transform.position, Vector2.down, groundCastLenght,groundLayer);
+        var groundcast = Physics2D.Raycast(transform.position, Vector2.down, groundCastLenght, groundLayer);
         isGround = (groundcast);
 
     }
@@ -162,7 +168,7 @@ public class PlayerController : MonoBehaviour
     public void OnJump()
     {
         if (isGround)
-        rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
     }
 
     #endregion
@@ -226,7 +232,7 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputValue value)
     {
         if (!_canAct)
-           return;
+            return;
 
         var _holdingButton = value.isPressed;
 
@@ -386,7 +392,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCastLenght);
 
         if (SpecialOverlay)
-        SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;
+            SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;
     }
 
     void HandleAninmation()

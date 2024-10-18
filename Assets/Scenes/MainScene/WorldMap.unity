@@ -3624,8 +3624,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1710197241, guid: 6db8f0db92a0c6443b4764fe0c8e0f16, type: 3}
+    - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
       propertyPath: m_SortingLayerID

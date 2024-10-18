@@ -2124,6 +2124,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1939657016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281253437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6130929517966231876, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+  m_PrefabInstance: {fileID: 893793440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda8447d91fb26446af30f15ba726786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &293932287
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,6 +4457,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1710197241, guid: 6db8f0db92a0c6443b4764fe0c8e0f16, type: 3}
+    - target: {fileID: 2025090526919704887, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
       propertyPath: m_SortingLayer
       value: 6
       objectReference: {fileID: 0}
@@ -6273,6 +6292,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 337968866699488580, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 281253437}
+    - target: {fileID: 337968866699488580, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSFXVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 337968866699488580, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Daggoot.SettingsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1547721411764296277, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6316,6 +6347,18 @@ PrefabInstance:
     - target: {fileID: 4120677859163241085, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759317666088290787, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 281253437}
+    - target: {fileID: 4759317666088290787, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetAmbientVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759317666088290787, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Daggoot.SettingsManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4844439306214842428, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6348,6 +6391,18 @@ PrefabInstance:
     - target: {fileID: 5503788209570293492, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666430814413741951, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 281253437}
+    - target: {fileID: 5666430814413741951, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666430814413741951, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Daggoot.SettingsManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6086372140362536532, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6418,13 +6473,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6696301880226695803, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
-      propertyPath: music_Bg
-      value: 
-      objectReference: {fileID: 8300000, guid: 08297218a0604554c9d9d85ea0430ce1, type: 3}
+      propertyPath: maxTimeBetween
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6696301880226695803, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
-      propertyPath: ambient_Horror
-      value: 
-      objectReference: {fileID: 8300000, guid: 98a19acae94b5ea4a94802a6dbbcfb6b, type: 3}
+      propertyPath: minTimeBetween
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6862576889385676457, guid: 3e296cfb38854f04c850451d27bec325, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -19,6 +19,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip interactWrong_sfx;
     public AudioClip enterDoor_sfx;
     public AudioClip closeDoor_sfx;
+    public AudioClip ghost_sfx;
+    public AudioClip jump_sfx;
+    public AudioClip hide_sfx;
     public AudioClip[] walking_sfx;
 
     [Header("Settings")]
