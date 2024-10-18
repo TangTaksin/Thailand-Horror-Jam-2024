@@ -10,7 +10,7 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] public float delaytransition = 1f;
     public Vector3 position { get { return transform.position; } }
 
-    [SerializeField] bool _isInteractable;
+    [SerializeField] public bool _isInteractable;
     public bool isInteractable
     {
         get { return _isInteractable; }

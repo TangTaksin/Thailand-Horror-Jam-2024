@@ -601,7 +601,7 @@ MonoBehaviour:
   connect_code: G
   targetLevelIndex: 6
   delaytransition: 0.4
-  _isInteractable: 1
+  _isInteractable: 0
 --- !u!61 &110353088
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -715,7 +715,7 @@ MonoBehaviour:
   feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
+  displayable: 0
   isInfo: 0
 --- !u!50 &110353091
 Rigidbody2D:
@@ -761,10 +761,58 @@ MonoBehaviour:
   isSeenDecay: 1
   OnSeenEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 110353090}
+        m_TargetAssemblyTypeName: ShowDisplayName, Assembly-CSharp
+        m_MethodName: SetDisplayable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 110353087}
+        m_TargetAssemblyTypeName: Door, Assembly-CSharp
+        m_MethodName: set_isInteractable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnUnseenEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 110353090}
+        m_TargetAssemblyTypeName: ShowDisplayName, Assembly-CSharp
+        m_MethodName: SetDisplayable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 110353087}
+        m_TargetAssemblyTypeName: Door, Assembly-CSharp
+        m_MethodName: set_isInteractable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &116075979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,7 +2672,7 @@ MonoBehaviour:
   feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
+  displayable: 0
   isInfo: 0
 --- !u!114 &411328666
 MonoBehaviour:
@@ -2746,7 +2794,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 774925989
   m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 278820550, guid: bf29d2cac9ebfdb42a1e9c436f0be441, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2790,7 +2838,19 @@ MonoBehaviour:
   isSeenDecay: 1
   OnSeenEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 411328665}
+        m_TargetAssemblyTypeName: ShowDisplayName, Assembly-CSharp
+        m_MethodName: SetDisplayable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnUnseenEvent:
     m_PersistentCalls:
       m_Calls: []
