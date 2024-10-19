@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.3
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 0
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &856400765709026982
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,9 +500,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.4
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 0
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &2442153016201039014
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,9 +716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.6
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 0
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &2714047770145527341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,9 +1023,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.2
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 1
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &3933449145795448335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,10 +1036,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146977772485628820}
+  - component: {fileID: 8573094656793702589}
   - component: {fileID: 2909503627567170263}
   - component: {fileID: 1195667067556993961}
   - component: {fileID: 4792610462494604271}
-  - component: {fileID: 8573094656793702589}
   m_Layer: 0
   m_Name: "\u0E40\u0E16\u0E49\u0E32\u0E01\u0E23\u0E30\u0E14\u0E39\u0E01"
   m_TagString: Untagged
@@ -1058,6 +1062,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6260724064065589182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8573094656793702589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933449145795448335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c070f288b12fd4d88c148fb72b0e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 0}
+  objectToActivate: {fileID: 0}
+  _isInteractable: 1
 --- !u!114 &2909503627567170263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyID: "\u0E40\u0E16\u0E49\u0E32\u0E01\u0E23\u0E30\u0E14\u0E39\u0E01"
   feedbackManager: {fileID: 0}
+  _isInteractable: 1
 --- !u!212 &1195667067556993961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1111,7 +1131,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1858656751
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1169,20 +1189,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
---- !u!114 &8573094656793702589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3933449145795448335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c070f288b12fd4d88c148fb72b0e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToDestroy: {fileID: 0}
-  objectToActivate: {fileID: 0}
 --- !u!1 &4487022103428358462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,9 +1286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.2
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 1
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &4818140614688905500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,7 +1364,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 774925989
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1430,6 +1437,7 @@ MonoBehaviour:
   requiredKeyID: "\u0E01\u0E38\u0E0D\u0E41\u0E08\u0E1B\u0E48\u0E32\u0E0A\u0E49\u0E32"
   door: {fileID: 4818140614688905500}
   feedbackManager: {fileID: 0}
+  _isInteractable: 0
 --- !u!61 &444065687613686403
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1603,9 +1611,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.1
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 0
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &5142308678783509181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,9 +2044,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.5
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 0
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &7280160145369746498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,9 +2147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25e33561ad78ef4f9bd196145769b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.65
+  baseParallaxEffectMultiplier: 0.1
   canLoop: 0
   textureUnitSizeX: 0
+  smoothFactor: 5
 --- !u!1 &7859043542256857902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,6 +2261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyID: "\u0E18\u0E39\u0E1B\u0E40\u0E17\u0E35\u0E22\u0E19"
   feedbackManager: {fileID: 0}
+  _isInteractable: 1
 --- !u!212 &85300095898944880
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2289,7 +2301,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1858656751
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -4986,6 +4986,7 @@ GameObject:
   - component: {fileID: 3759724115115686610}
   - component: {fileID: 8732945871065119132}
   - component: {fileID: 8842088023772920731}
+  - component: {fileID: -6840246546554183045}
   m_Layer: 7
   m_Name: Bull Patrol
   m_TagString: Untagged
@@ -5056,9 +5057,9 @@ SpriteRenderer:
   m_SortingLayerID: 774925989
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1965602612, guid: 263219544f9c8384181babd380e93774, type: 3}
+  m_Sprite: {fileID: -288711393, guid: 721d4ebeb357c9f4f9953346adaceb6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -5177,3 +5178,24 @@ MonoBehaviour:
   disable_on_return: 0
   return_time: 15
   initial_state: 0
+--- !u!95 &-6840246546554183045
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383360645699753802}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8d3d9f197cf9524fb90db5e99b26816, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

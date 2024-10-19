@@ -82,7 +82,7 @@ public class Ghost : MonoBehaviour
         var normaVel = rigid2d.velocity.normalized;
         var xDir = normaVel.x;
         ghostDir = Mathf.Lerp(ghostDir, xDir, Mathf.Abs(xDir));
-        ghostRenderer.flipX = (ghostDir < 0);
+        ghostRenderer.flipX = (ghostDir > 0);
     }
 
     public void SetBeingSeen()

@@ -177,7 +177,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundCastLenght: 1.1
+  groundCastLenght: 0.5
   jumpforce: 5
   _canAct: 1
   feedbackManager: {fileID: 0}
