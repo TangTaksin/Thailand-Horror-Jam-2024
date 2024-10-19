@@ -49,7 +49,7 @@ public static class SaveSystem
 
             // Use the CalledFadeIn transition
             Transition.CalledFadeIn();
-            yield return new WaitForSeconds(.5f); // Delay before loading player data
+            yield return new WaitForSeconds(0.5f); // Delay before loading player data
 
             // Update player's position from saved data
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);

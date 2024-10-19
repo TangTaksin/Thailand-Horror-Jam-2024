@@ -26,7 +26,25 @@ public class GoToNextSceneTimeline : MonoBehaviour
         }
     }
 
-    // This method is called when the timeline stops (i.e., when it finishes)
+    // Update is called once per frame
+    void Update()
+    {
+        // Check if the spacebar is pressed
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // If the timeline is still playing, stop it
+            if (playableDirector != null && playableDirector.state == PlayState.Playing)
+            {
+                // Stop the timeline
+                playableDirector.Stop();
+
+                // Manually trigger the OnPlayableDirectorStopped method
+                OnPlayableDirectorStopped(playableDirector);
+            }
+        }
+    }
+
+    // This method is called when the timeline stops (i.e., when it finishes or is manually stopped)
     private void OnPlayableDirectorStopped(PlayableDirector director)
     {
         // Check if the director that stopped is the one we're monitoring

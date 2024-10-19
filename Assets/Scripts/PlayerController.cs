@@ -339,8 +339,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
+        isHiding = false;
+        underLeg = false;
         _animator.Play("nen_jun_ded");
-
         SaveSystem.LoadPlayer(gameObject);
     }
 

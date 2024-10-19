@@ -117,7 +117,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 2
-      minScalar: 0.5
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -287,7 +287,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -2082,7 +2082,7 @@ ParticleSystem:
     m_Curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 5.37
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2136,7 +2136,7 @@ ParticleSystem:
     enabled: 0
     m_Curve:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -2187,7 +2187,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_Range: {x: 0, y: 1}
+    m_Range: {x: 4, y: 5}
   ForceModule:
     enabled: 0
     x:
@@ -5000,7 +5000,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7383360645699753802}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5053,8 +5053,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2055805165
-  m_SortingLayer: 1
+  m_SortingLayerID: 774925989
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: -1965602612, guid: 263219544f9c8384181babd380e93774, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5142,7 +5142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1000
-  attackRange: 0.72
+  attackRange: 0.9
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -5158,9 +5158,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95f1ab13f4312644a2f0e6186c2c211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 10
+  detectionRange: 20
   seenDecayActive: 1
-  isSeenDecay: 1
+  isSeenDecay: 10
+  OnSeenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnseenEvent:
+    m_PersistentCalls:
+      m_Calls: []
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -5169,5 +5175,5 @@ MonoBehaviour:
   maxChaseSpeed: 50
   chaseAcceleration: 25
   disable_on_return: 0
-  return_time: 5
+  return_time: 15
   initial_state: 0
