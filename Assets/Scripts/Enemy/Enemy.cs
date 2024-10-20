@@ -7,16 +7,27 @@ public class Enemy : MonoBehaviour
     public float damage = 20f; // Damage dealt by the enemy
     public float attackRange = 1f; // Attack range for the enemy
     public LayerMask playerLayer; // Layer to detect player
+    public float attackCooldown = 2f; // Cooldown between attacks (in seconds)
+
+    private float lastAttackTime = 0f; // Time since last attack
 
     void Update()
     {
-        // Check for the player in the attack range
-        Collider2D player = Physics2D.OverlapCircle(transform.position, attackRange, playerLayer);
-        if (player != null)
+        // Check if enough time has passed since the last attack
+        if (Time.time >= lastAttackTime + attackCooldown)
         {
-            // If the player is in range, deal damage
-            PlayerController playerController = player.GetComponent<PlayerController>();
-            playerController.TakeDamage(damage);
+            // Check for the player in the attack range
+            Collider2D player = Physics2D.OverlapCircle(transform.position, attackRange, playerLayer);
+            if (player != null)
+            {
+                // If the player is in range, deal damage
+                PlayerController playerController = player.GetComponent<PlayerController>();
+                if (playerController != null) // Ensure player has the PlayerController component
+                {
+                    playerController.TakeDamage(damage);
+                    lastAttackTime = Time.time; // Reset the attack timer
+                }
+            }
         }
     }
 

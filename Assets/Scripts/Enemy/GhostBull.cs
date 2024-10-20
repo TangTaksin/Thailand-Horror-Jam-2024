@@ -15,6 +15,7 @@ public class GhostBull : Ghost
     public float ChaseDelay = 3f;
     public float maxChaseSpeed = 10f;
     public float chaseAcceleration = 2f;
+    public Vector3 offsetChase = new Vector3(0, 2.2f, 0);
 
     public bool disable_on_return;
     public float return_time = 30f;
@@ -24,7 +25,7 @@ public class GhostBull : Ghost
 
     bool lockedIn;
 
-    public enum State { patrol, prepare, chase}
+    public enum State { patrol, prepare, chase }
     public State initial_state;
     State curState = State.patrol;
 
@@ -92,7 +93,7 @@ public class GhostBull : Ghost
     void Prepare()
     {
 
-        chaseDir = player.position - transform.position;
+        chaseDir = (player.position - transform.position) + offsetChase;
         chaseDir.Normalize();
         ghostDir = chaseDir.x;
 

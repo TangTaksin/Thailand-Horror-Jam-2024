@@ -27,10 +27,8 @@ public class Key : MonoBehaviour, IInteractable
 
         // Hide the key's sprite renderer and start destruction coroutine
         HideSpriteRenderer();
-        StartCoroutine(DestroyKeyAfterDelay(2.5f));
-
-        // Mark the key as not interactable
         isInteractable = false;
+        StartCoroutine(DestroyKeyAfterDelay(1.5f));
     }
 
     private void ShowFeedbackWithHighlight(string keyID)

@@ -1879,13 +1879,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HideArea
       objectReference: {fileID: 0}
+    - target: {fileID: 9110855157116943368, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
+      propertyPath: feedbackManager
+      value: 
+      objectReference: {fileID: 151597532}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6182549433792389814, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1814447412}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
 --- !u!1 &975269256
 GameObject:
@@ -2131,37 +2132,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: HideArea (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9110855157116943368, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
+      propertyPath: feedbackManager
+      value: 
+      objectReference: {fileID: 151597532}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6182549433792389814, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1812742889}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
---- !u!1 &1094245416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6182549433792389814, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
-  m_PrefabInstance: {fileID: 1681064566}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1094245417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094245416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a457d56d594a741874e8561244549d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Hold S for hiding
-  feedbackManager: {fileID: 151597532}
-  isNPC: 0
-  isItem: 0
-  displayable: 1
-  isInfo: 1
 --- !u!1 &1251749284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2471,13 +2450,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HideArea (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9110855157116943368, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
+      propertyPath: feedbackManager
+      value: 
+      objectReference: {fileID: 151597532}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6182549433792389814, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1094245417}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
 --- !u!1 &1692972956
 GameObject:
@@ -2896,52 +2876,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &1812742888 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6182549433792389814, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
-  m_PrefabInstance: {fileID: 1055858848}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1812742889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812742888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a457d56d594a741874e8561244549d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Hold S for hiding
-  feedbackManager: {fileID: 151597532}
-  isNPC: 0
-  isItem: 0
-  displayable: 1
-  isInfo: 1
---- !u!1 &1814447407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6182549433792389814, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
-  m_PrefabInstance: {fileID: 960634482}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1814447412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814447407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a457d56d594a741874e8561244549d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Hold S for hiding
-  feedbackManager: {fileID: 151597532}
-  isNPC: 0
-  isItem: 0
-  displayable: 1
-  isInfo: 1
 --- !u!1 &1867245752
 GameObject:
   m_ObjectHideFlags: 0
