@@ -5,6 +5,8 @@ public class Key : MonoBehaviour, IInteractable
 {
     public string keyID; // Unique identifier for this key
     public FeedbackManager feedbackManager; // Reference to the FeedbackManager
+    public GameObject objectToDestroy;   // Object to destroy after collecting the item
+    public GameObject objectToActivate;
 
     public Vector3 position => transform.position; // Use expression-bodied member for simplicity
 
@@ -27,7 +29,7 @@ public class Key : MonoBehaviour, IInteractable
 
         // Hide the key's sprite renderer and start destruction coroutine
         HideSpriteRenderer();
-        isInteractable = false;
+        //isInteractable = false;
         StartCoroutine(DestroyKeyAfterDelay(1.5f));
     }
 
@@ -44,6 +46,17 @@ public class Key : MonoBehaviour, IInteractable
         if (spriteRenderer != null)
         {
             spriteRenderer.enabled = false; // Hide the sprite
+
+            if (objectToDestroy != null)
+            {
+                Destroy(objectToDestroy);
+            }
+
+            if (objectToActivate != null)
+            {
+                objectToActivate.SetActive(true);
+            }
+
         }
     }
 

@@ -541,11 +541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E25\u0E31\u0E07\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &110353085
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,11 +711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E25\u0E36\u0E01"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 0
   isInfo: 0
+  displayable: 0
 --- !u!50 &110353091
 Rigidbody2D:
   serializedVersion: 4
@@ -1161,11 +1159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "Space Bar \u0E01\u0E23\u0E30\u0E42\u0E14\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 0
   isInfo: 1
+  displayable: 0
 --- !u!61 &153533959
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1526,11 +1523,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &197222419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2071,14 @@ PrefabInstance:
       propertyPath: feedbackManager
       value: 
       objectReference: {fileID: 200857494}
+    - target: {fileID: 2909503627567170263, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: objectToDestroy
+      value: 
+      objectReference: {fileID: 1944120891}
+    - target: {fileID: 2909503627567170263, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: objectToActivate
+      value: 
+      objectReference: {fileID: 1119573940}
     - target: {fileID: 3102873121582546834, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       propertyPath: m_Name
       value: 2Graveyard
@@ -2099,6 +2103,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 5.3589973
       objectReference: {fileID: 0}
+    - target: {fileID: 3714083395658717614, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_Size.x
+      value: 1.257824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714083395658717614, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.12891197
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714083395658717614, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3792403981166534671, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       propertyPath: requiredKeyID
       value: "\u0E04\u0E49\u0E2D\u0E19"
@@ -2115,6 +2131,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 033fbabe7472af14dabbaf82c6f13a7b, type: 3}
+    - target: {fileID: 4792610462494604271, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0284157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792610462494604271, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8593521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792610462494604271, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.067625046
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792610462494604271, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.012680054
+      objectReference: {fileID: 0}
     - target: {fileID: 4792610462494604271, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.6666667
@@ -2143,6 +2175,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 2.6666667
       objectReference: {fileID: 0}
+    - target: {fileID: 5630452146448047253, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: objectToDestroy
+      value: 
+      objectReference: {fileID: 1944120891}
+    - target: {fileID: 5630452146448047253, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
+      propertyPath: objectToActivate
+      value: 
+      objectReference: {fileID: 1119573940}
     - target: {fileID: 6260724064065589182, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2248,7 +2288,8 @@ PrefabInstance:
       value: -0.00000071525574
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7837632049621244583, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6260724064065589182, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       insertIndex: 11
@@ -3110,11 +3151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E19\u0E32\u0E07\u0E15\u0E32\u0E19\u0E35"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 0
   isInfo: 0
+  displayable: 0
 --- !u!114 &411328666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,7 +3401,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 442060431}
-  - component: {fileID: 442060439}
   - component: {fileID: 442060436}
   - component: {fileID: 442060435}
   - component: {fileID: 442060434}
@@ -3425,11 +3464,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D\u0E27\u0E31\u0E19\u0E40\u0E2A\u0E32\u0E23\u0E4C"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 0
   isInfo: 0
+  displayable: 0
 --- !u!61 &442060434
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3541,6 +3579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyID: "\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D\u0E27\u0E31\u0E19\u0E40\u0E2A\u0E32\u0E23\u0E4C"
   feedbackManager: {fileID: 200857494}
+  objectToDestroy: {fileID: 1119573940}
+  objectToActivate: {fileID: 1965853765}
   _isInteractable: 1
 --- !u!50 &442060437
 Rigidbody2D:
@@ -3611,7 +3651,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 442060439}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Item, Assembly-CSharp
         m_MethodName: set_isInteractable
         m_Mode: 6
@@ -3650,7 +3690,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 442060439}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Item, Assembly-CSharp
         m_MethodName: set_isInteractable
         m_Mode: 6
@@ -3662,21 +3702,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &442060439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442060430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c070f288b12fd4d88c148fb72b0e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToDestroy: {fileID: 1119573940}
-  objectToActivate: {fileID: 1965853765}
-  _isInteractable: 0
 --- !u!1 &483732930
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,11 +4175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E27\u0E34\u0E2B\u0E32\u0E23"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!60 &594212529 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 9063883944860040273, guid: 61a1dcde661f83a4da2f20bf319826ef, type: 3}
@@ -4916,11 +4940,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E14\u0E47\u0E01\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!114 &687483602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5217,11 +5240,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E32\u0E19\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &736685714
 GameObject:
   m_ObjectHideFlags: 0
@@ -5774,11 +5796,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E32\u0E19\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &779138204
 GameObject:
   m_ObjectHideFlags: 0
@@ -6543,11 +6564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "Space Bar \u0E01\u0E23\u0E30\u0E42\u0E14\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 0
   isInfo: 1
+  displayable: 0
 --- !u!61 &851159555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6902,11 +6922,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E19\u0E49\u0E33\u0E41\u0E14\u0E07"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!95 &882669542
 Animator:
   serializedVersion: 5
@@ -7920,11 +7939,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E19\u0E49\u0E32\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &909876047
 GameObject:
   m_ObjectHideFlags: 0
@@ -8190,11 +8208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &938343194
 GameObject:
   m_ObjectHideFlags: 0
@@ -8359,11 +8376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E01\u0E25\u0E49\u0E27\u0E22"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1001 &961223317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8899,11 +8915,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1008908347
 GameObject:
   m_ObjectHideFlags: 0
@@ -9284,11 +9299,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E04\u0E49\u0E2D\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!61 &1066080759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9400,6 +9414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyID: "\u0E04\u0E49\u0E2D\u0E19"
   feedbackManager: {fileID: 200857494}
+  objectToDestroy: {fileID: 0}
+  objectToActivate: {fileID: 0}
   _isInteractable: 1
 --- !u!1 &1069618023
 GameObject:
@@ -9470,11 +9486,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "Space Bar \u0E01\u0E23\u0E30\u0E42\u0E14\u0E14"
-  feedbackManager: {fileID: 0}
   isNPC: 0
   isItem: 0
-  displayable: 0
   isInfo: 1
+  displayable: 0
 --- !u!61 &1069618027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9773,11 +9788,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "Space Bar \u0E01\u0E23\u0E30\u0E42\u0E14\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 0
   isInfo: 1
+  displayable: 0
 --- !u!61 &1088304693
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10955,11 +10969,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E01\u0E25\u0E49\u0E27\u0E22"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1225765797
 GameObject:
   m_ObjectHideFlags: 0
@@ -11141,11 +11154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E38\u0E07\u0E01\u0E49\u0E2D\u0E07"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1234528570
 GameObject:
   m_ObjectHideFlags: 0
@@ -11411,11 +11423,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E32\u0E19\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1001 &1276596811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12004,11 +12015,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E14\u0E47\u0E01\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1352437484
 GameObject:
   m_ObjectHideFlags: 0
@@ -12161,11 +12171,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E16\u0E49\u0E32\u0E01\u0E23\u0E30\u0E14\u0E39\u0E01"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!95 &1367918042
 Animator:
   serializedVersion: 5
@@ -12401,11 +12410,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E49\u0E32\u0E19\u0E35"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1422920242
 GameObject:
   m_ObjectHideFlags: 0
@@ -13997,11 +14005,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E44\u0E21\u0E48\u0E40\u0E23\u0E47\u0E27"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1939657015
 GameObject:
   m_ObjectHideFlags: 0
@@ -14166,11 +14173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E19\u0E49\u0E32\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1942608395
 GameObject:
   m_ObjectHideFlags: 0
@@ -14547,6 +14553,10 @@ PrefabInstance:
       propertyPath: feedbackManager
       value: 
       objectReference: {fileID: 200857494}
+    - target: {fileID: 2816089841806215343, guid: d5569e7951d5c93468778c2c772b70a1, type: 3}
+      propertyPath: objectToDestroy
+      value: 
+      objectReference: {fileID: 1965853765}
     - target: {fileID: 3869107616586162895, guid: d5569e7951d5c93468778c2c772b70a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33
@@ -14611,7 +14621,8 @@ PrefabInstance:
       propertyPath: objectToActivate
       value: 
       objectReference: {fileID: 1154301152}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7582465073974025417, guid: d5569e7951d5c93468778c2c772b70a1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
