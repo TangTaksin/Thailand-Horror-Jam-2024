@@ -268,6 +268,7 @@ public class PlayerController : MonoBehaviour
     public void OnHide(InputValue value)
     {
         var _pressing = value.isPressed;
+        //bool _pressing = value.Get<bool>();
         print(_pressing);
 
         if (currentHidingSpot != null) // Only allow hiding if in a hiding spot
@@ -280,6 +281,7 @@ public class PlayerController : MonoBehaviour
                 SetAlpha(0.5f); // Set transparency to 50%
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
                 _animator.Play("nen_jun_hide");
+                _animator.SetBool("IsHide", _pressing);
                 Debug.Log("Player is hiding in a hiding spot."); // Optional: log to console
             }
             else
@@ -287,7 +289,7 @@ public class PlayerController : MonoBehaviour
                 isHiding = false; // Exit hiding state
                 SetAlpha(1f);
                 spriteRenderer.sortingOrder = normalSortingOrder;
-                _animator.SetTrigger("Released");
+                _animator.SetBool("IsHide", _pressing);
                 Debug.Log("Player is no longer hiding.");
             }
         }

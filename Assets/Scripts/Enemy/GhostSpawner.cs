@@ -70,6 +70,7 @@ public class GhostSpawner : MonoBehaviour
         ghost_instance.transform.position = transform.position;
         ghost_instance.SetActive(true);
         res_timer = 0;
+        ghost_instance.GetComponent<Ghost>().isSeen = true;
 
         respawn_seconds = Random.Range(respawn_seconds_min, respawn_seconds_max);
     }

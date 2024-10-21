@@ -1274,7 +1274,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1327,7 +1327,7 @@ MonoBehaviour:
       m_Calls: []
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!4 &614613476
 Transform:
   m_ObjectHideFlags: 0
@@ -1946,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1698068951305291237, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1698068951305291237, guid: 14ed6d570f7581848ba1dcdf3125a79c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3341,6 +3341,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8254260391075970471, guid: dca881111d5baf9408665b00b82c2f26, type: 3}
+      propertyPath: feedbackManager
+      value: 
+      objectReference: {fileID: 151597532}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

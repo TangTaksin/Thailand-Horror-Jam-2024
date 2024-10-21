@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 60
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4844,6 +4844,7 @@ GameObject:
   - component: {fileID: 2075311110792917349}
   - component: {fileID: 1154356922629758330}
   - component: {fileID: 3929513755193397469}
+  - component: {fileID: 7267772582968533266}
   m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
@@ -4860,8 +4861,8 @@ RectTransform:
   m_GameObject: {fileID: 4807613743932345112}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4483866195626528046}
   - {fileID: 4566241111290371988}
@@ -4911,10 +4912,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2055805165
-  m_SortingLayer: 1
+  m_SortingLayerID: 774925989
+  m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1965602612, guid: 263219544f9c8384181babd380e93774, type: 3}
+  m_Sprite: {fileID: -1357520537, guid: b361777a62c07594bbff29f53462e5a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4959,7 +4960,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2.55
 --- !u!50 &2075311110792917349
 Rigidbody2D:
   serializedVersion: 4
@@ -5000,10 +5001,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1000
-  attackRange: 0.72
+  attackRange: 1.64
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  attackCooldown: 2
 --- !u!114 &3929513755193397469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5017,18 +5019,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 20
-  seenDecayActive: 1
+  seenDecayActive: 0
   isSeenDecay: 1
+  OnSeenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnseenEvent:
+    m_PersistentCalls:
+      m_Calls: []
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   moveSpeed: 2
-  ChaseDelay: 1
+  ChaseDelay: 2
   maxChaseSpeed: 50
   chaseAcceleration: 25
+  offsetChase: {x: 0, y: 2.2, z: 0}
   disable_on_return: 1
   return_time: 5
   initial_state: 1
+--- !u!95 &7267772582968533266
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807613743932345112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8d3d9f197cf9524fb90db5e99b26816, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7359325477539669492
 GameObject:
   m_ObjectHideFlags: 0
