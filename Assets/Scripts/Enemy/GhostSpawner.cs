@@ -22,7 +22,8 @@ public class GhostSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-
+        if (ghost_instance)
+            ghost_instance.SetActive(false);
     }
 
     void initialize()

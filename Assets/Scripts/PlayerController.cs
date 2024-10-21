@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public static BoolEvent HideStateChanged;
     public static BoolEvent UndertheLegStateChanged;
 
+    public delegate void GenericEvent();
+    public static GenericEvent OnDeath;
+
     [Header("Player Settings")]
     public float moveSpeed = 5f;
     public float maxHealth = 100f;
@@ -342,6 +345,7 @@ public class PlayerController : MonoBehaviour
         isHiding = false;
         underLeg = false;
         _animator.Play("nen_jun_ded");
+        OnDeath?.Invoke();
         SaveSystem.LoadPlayer(gameObject);
     }
 
@@ -410,9 +414,7 @@ public class PlayerController : MonoBehaviour
     void MovementAnimation()
     {
         transform.localScale = new Vector3(_facingAxis, 1, 1);
-
-        if (rb.velocity.magnitude > 0)
-            _animator.Play("nen_jun_run");
+        _animator.SetFloat("xMag", rb.velocity.magnitude);
 
     }
 }

@@ -117,8 +117,8 @@ TextureImporter:
         y: 571
         width: 33
         height: 95
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5151515, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,8 +138,8 @@ TextureImporter:
         y: 571
         width: 37
         height: 95
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.4864865, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -159,8 +159,8 @@ TextureImporter:
         y: 571
         width: 46
         height: 95
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.65217394, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: Nen jun Interaction_3
       rect:
         serializedVersion: 2
-        x: 2571
+        x: 2572
         y: 571
-        width: 51
+        width: 50
         height: 96
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.7, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -208,6 +208,7 @@ TextureImporter:
       Nen jun Interaction_1: -408264881
       Nen jun Interaction_2: 680351415
       Nen jun Interaction_3: -1003048912
+      Nen jun Interaction_4: -1579848107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

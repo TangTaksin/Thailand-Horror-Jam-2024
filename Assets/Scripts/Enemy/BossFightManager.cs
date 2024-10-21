@@ -14,12 +14,14 @@ public class BossFightManager : MonoBehaviour
     private void OnEnable()
     {
         BossPart.OnPartBreak += OnParkBreak;
+        PlayerController.OnDeath += Initialize;
         Initialize();
     }
 
     private void OnDisable()
     {
         BossPart.OnPartBreak -= OnParkBreak;
+        PlayerController.OnDeath -= Initialize;
     }
 
     public void Initialize()

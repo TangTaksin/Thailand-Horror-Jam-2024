@@ -56,6 +56,23 @@ public class SavePoint : MonoBehaviour, IInteractable
         }
     }
 
+    public void Save(GameObject obj)
+    {
+        var player = obj.GetComponent<PlayerController>();
+
+        if (player)
+        {
+            // Save the game when the player interacts
+            SaveSystem.SavePlayer(player.gameObject);
+
+            // Use FeedbackManager to show save feedback
+            feedbackManager?.ShowFeedback("Game saved!");
+
+            // Change sprite color to indicate save
+            ChangeSpriteColor(savedColor);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
