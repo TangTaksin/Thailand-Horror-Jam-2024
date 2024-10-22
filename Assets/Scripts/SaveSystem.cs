@@ -62,6 +62,7 @@ public static class SaveSystem
 
             // Set the save point to the loaded data
             playerController.SetSavePoint(player.transform.position, playerController.currentHealth);
+            playerController.InitializePlayer();
 
             Debug.Log("Game loaded from PlayerPrefs.");
         }

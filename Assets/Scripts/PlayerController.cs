@@ -130,11 +130,14 @@ public class PlayerController : MonoBehaviour
         MovementAnimation();
     }
 
-    private void InitializePlayer()
+    public void InitializePlayer()
     {
         currentHealth = maxHealth; // Set full health at the start
         savePoint = transform.position; // Initialize save point to the starting position
         saveHealth = maxHealth; // Initialize save health to max health
+        isHiding = false;
+        _animator.SetBool("IsHide", false);
+        underLeg = false;
     }
 
     #region Movement
@@ -155,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(_inputAxis * moveSpeed, rb.velocity.y);
         // Play walking sound if the player is moving
-        if (Mathf.Abs(_inputAxis) > 0.1f) // Check if there is significant input
+        if (Mathf.Abs(_inputAxis) > 0.1f && isGround) // Check if there is significant input
         {
             AudioManager.Instance?.PlayWalkingSFX();
         }
@@ -280,16 +283,14 @@ public class PlayerController : MonoBehaviour
                 SetAlpha(0.5f); // Set transparency to 50%
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
                 _animator.Play("nen_jun_hide");
-                _animator.SetBool("IsHide", _pressing);
-                Debug.Log(_pressing);
+                _animator.SetBool("IsHide", true);
             }
             else
             {
                 isHiding = false; // Exit hiding state
                 SetAlpha(1f);
                 spriteRenderer.sortingOrder = normalSortingOrder;
-                _animator.SetBool("IsHide", _pressing);
-                Debug.Log(_pressing);
+                _animator.SetBool("IsHide", false);
             }
         }
     }
@@ -351,6 +352,7 @@ public class PlayerController : MonoBehaviour
         _animator.Play("nen_jun_ded");
         OnDeath?.Invoke();
         SaveSystem.LoadPlayer(gameObject);
+        isHiding = false;
     }
 
     #endregion
