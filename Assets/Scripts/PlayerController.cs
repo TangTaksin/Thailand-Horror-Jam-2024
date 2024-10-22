@@ -158,7 +158,6 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(_inputAxis) > 0.1f) // Check if there is significant input
         {
             AudioManager.Instance?.PlayWalkingSFX();
-            
         }
     }
 
@@ -236,7 +235,7 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputValue value)
     {
         if (!_canAct || _isHiding || isUnderLegsMode)
-           return;
+            return;
 
         var _holdingButton = value.isPressed;
 
@@ -282,7 +281,7 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
                 _animator.Play("nen_jun_hide");
                 _animator.SetBool("IsHide", _pressing);
-                Debug.Log("Player is hiding in a hiding spot."); // Optional: log to console
+                Debug.Log(_pressing);
             }
             else
             {
@@ -290,7 +289,7 @@ public class PlayerController : MonoBehaviour
                 SetAlpha(1f);
                 spriteRenderer.sortingOrder = normalSortingOrder;
                 _animator.SetBool("IsHide", _pressing);
-                Debug.Log("Player is no longer hiding.");
+                Debug.Log(_pressing);
             }
         }
     }
@@ -330,7 +329,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            TakeDamage(50f);
+            SetAlpha(1f);
+            TakeDamage(100f);
         }
     }
 
@@ -340,12 +340,14 @@ public class PlayerController : MonoBehaviour
         {
             currentHealth -= damage;
         }
+
     }
 
     private void HandleDeath()
     {
         isHiding = false;
         underLeg = false;
+        _animator.SetBool("IsHide", false);
         _animator.Play("nen_jun_ded");
         OnDeath?.Invoke();
         SaveSystem.LoadPlayer(gameObject);
@@ -409,8 +411,8 @@ public class PlayerController : MonoBehaviour
             , DetectionRadius);
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCastLenght);
 
-/*        if (SpecialOverlay)
-        SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;*/
+        /*        if (SpecialOverlay)
+                SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;*/
     }
 
     void MovementAnimation()

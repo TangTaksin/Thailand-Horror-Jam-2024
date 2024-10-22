@@ -427,6 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 625453425}
+  door_code: 
   connect_code: E
   targetLevelIndex: 4
   delaytransition: 0.4
@@ -541,11 +542,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E25\u0E31\u0E07\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &110353085
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1705683346}
+  door_code: 
   connect_code: G
   targetLevelIndex: 6
   delaytransition: 0.4
@@ -710,11 +711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E25\u0E36\u0E01"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &116075979
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1302844256}
+  door_code: 
   connect_code: E
   targetLevelIndex: 5
   delaytransition: 0.4
@@ -1107,11 +1108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &197222419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,7 +1735,7 @@ PrefabInstance:
     - target: {fileID: 8573094656793702589, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       propertyPath: objectToActivate
       value: 
-      objectReference: {fileID: 578180456}
+      objectReference: {fileID: 0}
     - target: {fileID: 9071470027499843199, guid: 83cd9a89d4e2e8049a544ff651d3e663, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.5
@@ -1916,11 +1916,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D\u0E27\u0E31\u0E19\u0E1E\u0E24\u0E2B\u0E31\u0E2A"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 0
   isInfo: 0
+  displayable: 0
 --- !u!95 &274348892
 Animator:
   serializedVersion: 5
@@ -2552,11 +2551,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D\u0E27\u0E31\u0E19\u0E40\u0E2A\u0E32\u0E23\u0E4C"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!61 &442060434
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2668,6 +2666,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyID: "\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D\u0E27\u0E31\u0E19\u0E40\u0E2A\u0E32\u0E23\u0E4C"
   feedbackManager: {fileID: 200857494}
+  objectToDestroy: {fileID: 0}
+  objectToActivate: {fileID: 0}
   _isInteractable: 1
 --- !u!1 &483732930
 GameObject:
@@ -2906,6 +2906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 653659702}
+  door_code: 
   connect_code: A
   targetLevelIndex: 0
   delaytransition: 0.4
@@ -3020,16 +3021,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E27\u0E34\u0E2B\u0E32\u0E23"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 0
   isInfo: 0
---- !u!1 &578180456 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2422962830739939528, guid: ae08e9e9c1552c74eb2b3876f143ad4b, type: 3}
-  m_PrefabInstance: {fileID: 1276596811}
-  m_PrefabAsset: {fileID: 0}
+  displayable: 0
 --- !u!60 &594212529 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 9063883944860040273, guid: 61a1dcde661f83a4da2f20bf319826ef, type: 3}
@@ -3767,6 +3762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1434548317}
+  door_code: 
   connect_code: A
   targetLevelIndex: 1
   delaytransition: 0.4
@@ -3881,11 +3877,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E32\u0E19\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &736685714
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,7 +4024,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1942608396}
-  connect_code: B
+  door_code: D4
+  connect_code: D2
   targetLevelIndex: 2
   delaytransition: 0.4
   _isInteractable: 1
@@ -4143,11 +4139,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E32\u0E19\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &779138204
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,11 +5044,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E19\u0E49\u0E33\u0E41\u0E14\u0E07"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!95 &882669542
 Animator:
   serializedVersion: 5
@@ -5917,6 +5911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 761880352}
+  door_code: 
   connect_code: D
   targetLevelIndex: 4
   delaytransition: 0.4
@@ -6031,11 +6026,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E19\u0E49\u0E32\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &909876047
 GameObject:
   m_ObjectHideFlags: 0
@@ -6187,6 +6181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 116075980}
+  door_code: 
   connect_code: F
   targetLevelIndex: 6
   delaytransition: 0.4
@@ -6301,11 +6296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &938343194
 GameObject:
   m_ObjectHideFlags: 0
@@ -6356,6 +6350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 990915146}
+  door_code: 
   connect_code: F
   targetLevelIndex: 4
   delaytransition: 0.4
@@ -6470,11 +6465,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E01\u0E25\u0E49\u0E27\u0E22"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &965752500
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,6 +6682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 736685715}
+  door_code: 
   connect_code: D
   targetLevelIndex: 3
   delaytransition: 0.4
@@ -6802,11 +6797,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1008908347
 GameObject:
   m_ObjectHideFlags: 0
@@ -7151,11 +7145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E04\u0E49\u0E2D\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!61 &1066080759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7267,6 +7260,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyID: "\u0E04\u0E49\u0E2D\u0E19"
   feedbackManager: {fileID: 200857494}
+  objectToDestroy: {fileID: 0}
+  objectToActivate: {fileID: 0}
   _isInteractable: 1
 --- !u!1 &1075225786
 GameObject:
@@ -8413,6 +8408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 2045986109}
+  door_code: 
   connect_code: G
   targetLevelIndex: 7
   delaytransition: 0.4
@@ -8527,11 +8523,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E01\u0E25\u0E49\u0E27\u0E22"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1225765797
 GameObject:
   m_ObjectHideFlags: 0
@@ -8713,11 +8708,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E38\u0E07\u0E01\u0E49\u0E2D\u0E07"
-  feedbackManager: {fileID: 0}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1234528570
 GameObject:
   m_ObjectHideFlags: 0
@@ -8869,6 +8863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 811384071}
+  door_code: 
   connect_code: C
   targetLevelIndex: 3
   delaytransition: 0.4
@@ -8983,11 +8978,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E25\u0E32\u0E19\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1001 &1276596811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9588,11 +9582,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E14\u0E47\u0E01\u0E27\u0E31\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!95 &1319865976
 Animator:
   serializedVersion: 5
@@ -9766,11 +9759,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E40\u0E16\u0E49\u0E32\u0E01\u0E23\u0E30\u0E14\u0E39\u0E01"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 1
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!95 &1367918042
 Animator:
   serializedVersion: 5
@@ -10128,11 +10120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E49\u0E32\u0E19\u0E35"
-  feedbackManager: {fileID: 200857494}
   isNPC: 1
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1422920242
 GameObject:
   m_ObjectHideFlags: 0
@@ -10642,11 +10633,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "Space Bar \u0E01\u0E23\u0E30\u0E42\u0E14\u0E14"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 1
+  displayable: 1
 --- !u!61 &1633475760
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11217,11 +11207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "A D \u0E40\u0E14\u0E34\u0E19"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 1
+  displayable: 1
 --- !u!61 &1855564458
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11501,7 +11490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1143974677}
-  connect_code: B
+  door_code: D2
+  connect_code: D4
   targetLevelIndex: 0
   delaytransition: 0.4
   _isInteractable: 1
@@ -11615,11 +11605,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E1B\u0E48\u0E32\u0E44\u0E21\u0E48\u0E40\u0E23\u0E47\u0E27"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!1 &1939657015
 GameObject:
   m_ObjectHideFlags: 0
@@ -11766,11 +11755,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E22\u0E31\u0E07\u0E44\u0E21\u0E48\u0E43\u0E2B\u0E49\u0E44\u0E1B"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 1
+  displayable: 1
 --- !u!1 &1942608395
 GameObject:
   m_ObjectHideFlags: 0
@@ -12643,11 +12631,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: "\u0E27\u0E34\u0E2B\u0E32\u0E23"
-  feedbackManager: {fileID: 200857494}
   isNPC: 0
   isItem: 0
-  displayable: 1
   isInfo: 0
+  displayable: 1
 --- !u!114 &2132627984
 MonoBehaviour:
   m_ObjectHideFlags: 0
