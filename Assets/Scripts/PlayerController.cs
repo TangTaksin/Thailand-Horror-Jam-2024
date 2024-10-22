@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         // Play walking sound if the player is moving
         if (Mathf.Abs(_inputAxis) > 0.1f) // Check if there is significant input
         {
-            AudioManager.Instance.PlayWalkingSFX();
+            AudioManager.Instance?.PlayWalkingSFX();
             
         }
     }

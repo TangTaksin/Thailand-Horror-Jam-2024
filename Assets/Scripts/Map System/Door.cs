@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
     public Transform destination; // The position where the player will appear in the next level
+    public string door_code;
     public string connect_code;   // Code to identify the door connection
     [SerializeField] public int targetLevelIndex;  // Index of the target level to load when entering the door
     [SerializeField] public float delaytransition = 1f;
@@ -41,7 +42,7 @@ public class Door : MonoBehaviour, IInteractable
     // Interaction method
     public void Interact(object _interacter)
     {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.interact_sfx);
+        AudioManager.Instance?.PlaySFX(AudioManager.Instance.interact_sfx);
         DoorEntered -= OnEnterDoor;
         DoorEntered?.Invoke(_interacter, connect_code); // Invoke the door event
         DoorEntered += OnEnterDoor;
@@ -50,10 +51,12 @@ public class Door : MonoBehaviour, IInteractable
     // Handle the event when the player enters the door
     void OnEnterDoor(object interacter, string in_code)
     {
+        print(string.Format("recieve door signal, code : {0}", in_code));
+
         var inter = interacter as PlayerController;
 
         // Check if the connect code matches this door's code
-        if (in_code == connect_code)
+        if (in_code == door_code)
         {
             // Load the target level and move the player to the destination point
             if (levelManager != null)
@@ -61,6 +64,8 @@ public class Door : MonoBehaviour, IInteractable
                 StartCoroutine(TransitionWithDelay(inter));
 
             }
+            else
+                inter.transform.position = destination.position;
         }
     }
 
