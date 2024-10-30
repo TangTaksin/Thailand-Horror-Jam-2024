@@ -31,6 +31,11 @@ public class SceneChanger : MonoBehaviour, IInteractable
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
+            if (sceneToLoad == "CutScene2")
+            {
+                AudioManager.Instance.ChangeMusic(AudioManager.Instance.introBossRoomBg);
+            }
+
             SceneManager.LoadScene(sceneToLoad);  // Load scene by name
         }
         else

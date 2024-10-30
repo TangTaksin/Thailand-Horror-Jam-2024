@@ -38,6 +38,7 @@ public class BossPart : MonoBehaviour, IInteractable
 
     public void Interact(object interacter)
     {
+        AudioManager.Instance.PlaySFXClone(AudioManager.Instance.hittingSfx);
         isBroken = true;
         gameObject.SetActive(false);
         OnPartBreak?.Invoke(gameObject);

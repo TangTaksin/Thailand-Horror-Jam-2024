@@ -17,7 +17,7 @@ public class GoToNextSceneTimeline : MonoBehaviour
             // Attempt to automatically find the PlayableDirector if not set in the inspector
             playableDirector = GetComponent<PlayableDirector>();
         }
-        
+
         // Ensure we have a valid PlayableDirector reference
         if (playableDirector != null)
         {
@@ -50,6 +50,10 @@ public class GoToNextSceneTimeline : MonoBehaviour
         // Check if the director that stopped is the one we're monitoring
         if (director == playableDirector)
         {
+            if (nextSceneName == "BossRoom")
+            {
+                AudioManager.Instance.ChangeMusic(AudioManager.Instance.bossRoomBg);
+            }
             // Load the next scene
             SceneManager.LoadScene(nextSceneName);
         }

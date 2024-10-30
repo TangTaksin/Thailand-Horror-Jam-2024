@@ -174,7 +174,10 @@ public class PlayerController : MonoBehaviour
     public void OnJump()
     {
         if (isGround)
+        {
             rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+        }
+
     }
 
     #endregion
@@ -284,13 +287,18 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.sortingOrder = 2; // Change to the desired sorting order when hiding
                 _animator.Play("nen_jun_hide");
                 _animator.SetBool("IsHide", true);
+                AudioManager.Instance.MuteMusic();
+                AudioManager.Instance.PlaySFXClone(AudioManager.Instance.hidingSfx); 
             }
             else
             {
+                AudioManager.Instance.UnmuteMusic();
+                AudioManager.Instance.StopSpecificSFXClone(AudioManager.Instance.hidingSfx);
                 isHiding = false; // Exit hiding state
                 SetAlpha(1f);
                 spriteRenderer.sortingOrder = normalSortingOrder;
                 _animator.SetBool("IsHide", false);
+
             }
         }
     }
@@ -346,6 +354,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
+        AudioManager.Instance.PlaySFXClone(AudioManager.Instance.damageSfx);
         isHiding = false;
         underLeg = false;
         _animator.SetBool("IsHide", false);
@@ -365,10 +374,17 @@ public class PlayerController : MonoBehaviour
         {
             isUnderLegsMode = !isUnderLegsMode;
             if (isUnderLegsMode)
+            {
                 _animator.Play("nen_jun_looking_through_enter");
+                AudioManager.Instance.MuteMusic();
+                AudioManager.Instance.PlaySFXClone(AudioManager.Instance.hidingSfx); 
+            }
             else
+            {
                 _animator.Play("nen_jun_looking_through_exit");
-
+                AudioManager.Instance.UnmuteMusic();
+                AudioManager.Instance.StopSpecificSFXClone(AudioManager.Instance.hidingSfx);
+            }
             UndertheLegStateChanged?.Invoke(isUnderLegsMode);
         }
     }
@@ -379,6 +395,7 @@ public class PlayerController : MonoBehaviour
 
         if (isUnderLegsMode)
         {
+
             SpecialOverlay.transform.position = transform.position + Vector3.up * DetectionOffset.y;
 
             var sphereCast = Physics2D.OverlapCircleAll

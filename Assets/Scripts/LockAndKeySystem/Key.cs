@@ -29,6 +29,7 @@ public class Key : MonoBehaviour, IInteractable
 
         // Hide the key's sprite renderer and start destruction coroutine
         HideSpriteRenderer();
+        AudioManager.Instance.PlaySFXClone(AudioManager.Instance.pickUpSfx);
         //isInteractable = false;
         StartCoroutine(DestroyKeyAfterDelay(1.5f));
     }

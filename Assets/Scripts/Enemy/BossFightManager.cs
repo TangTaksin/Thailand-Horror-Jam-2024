@@ -1,26 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;  // Add this to load scenes
+using UnityEngine.SceneManagement;
 
 public class BossFightManager : MonoBehaviour
 {
     public List<GhostSpawner> ghostSpawners;
     public List<BossPart> bossParts;
 
-    int bossProgress;
-    int bossProgressGoal;
+    private int bossProgress;
+    private int bossProgressGoal;
 
     private void OnEnable()
     {
-        BossPart.OnPartBreak += OnParkBreak;
+        BossPart.OnPartBreak += HandlePartBreak;
         PlayerController.OnDeath += Initialize;
         Initialize();
     }
 
     private void OnDisable()
     {
-        BossPart.OnPartBreak -= OnParkBreak;
+        BossPart.OnPartBreak -= HandlePartBreak;
         PlayerController.OnDeath -= Initialize;
     }
 
@@ -29,33 +28,45 @@ public class BossFightManager : MonoBehaviour
         bossProgress = 0;
         bossProgressGoal = bossParts.Count;
 
-        foreach (var gs in ghostSpawners)
-        {
-            gs.gameObject.SetActive(false);
-        }
+        // Deactivate all ghost spawners and boss parts initially
+        ghostSpawners.ForEach(gs => gs.gameObject.SetActive(false));
+        bossParts.ForEach(bp => bp.gameObject.SetActive(false));
 
-        foreach (var bs in bossParts)
+        // Activate the first boss part
+        if (bossParts.Count > 0)
         {
-            bs.gameObject.SetActive(true);
+            bossParts[0].gameObject.SetActive(true);
         }
     }
 
-    void OnParkBreak(GameObject obj)
+    private void HandlePartBreak(GameObject brokenPart)
     {
         bossProgress++;
-        var part = obj.GetComponent<BossPart>();
-        var index = bossParts.IndexOf(part);
-        ghostSpawners[index].gameObject.SetActive(true);
+        int partIndex = bossParts.IndexOf(brokenPart.GetComponent<BossPart>());
 
-        BossProgressCheck();
+        // Activate corresponding ghost spawner
+        if (partIndex >= 0 && partIndex < ghostSpawners.Count)
+        {
+            ghostSpawners[partIndex].gameObject.SetActive(true);
+        }
+
+        // Activate the next boss part, if available
+        if (partIndex + 1 < bossParts.Count)
+        {
+            bossParts[partIndex + 1].gameObject.SetActive(true);
+        }
+
+        CheckBossProgress();
     }
 
-    void BossProgressCheck()
+    private void CheckBossProgress()
     {
+
         if (bossProgress >= bossProgressGoal)
         {
-            // Boss Clear
-            SceneManager.LoadScene("CutSceneEnd");
+            AudioManager.Instance.PlaySFXClone(AudioManager.Instance.damageSfx);
+            AudioManager.Instance.ChangeMusic(AudioManager.Instance.musicBg);
+            SceneManager.LoadScene("CutSceneEnd");  // Load ending scene when boss is defeated
         }
     }
 }

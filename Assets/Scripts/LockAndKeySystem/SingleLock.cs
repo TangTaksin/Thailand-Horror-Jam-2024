@@ -24,6 +24,7 @@ public class SingleLock : MonoBehaviour, IInteractable
         if (interacter is PlayerController playerController)
         {
             AttemptUnlock(playerController.gameObject);
+            
         }
     }
 
@@ -47,11 +48,13 @@ public class SingleLock : MonoBehaviour, IInteractable
     {
         if (PlayerInventory.instance.HasKey(requiredKeyID)) // Check if player has the required key
         {
+            AudioManager.Instance.PlaySFXClone(AudioManager.Instance.pickUpSfx);
             Unlock();
         }
         else
         {
             feedbackManager.ShowFeedback($"ต้องการ <color=red>{requiredKeyID}</color> เพื่อปลดล็อก."); // Show key requirement feedback
+            AudioManager.Instance.PlaySFXClone(AudioManager.Instance.pickUpWrongSfx);
         }
     }
 

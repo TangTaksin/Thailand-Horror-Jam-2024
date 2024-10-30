@@ -96,7 +96,6 @@ public class GhostBull : Ghost
         chaseDir = (player.position - transform.position) + offsetChase;
         chaseDir.Normalize();
         ghostDir = chaseDir.x;
-
     }
 
     private IEnumerator ChaseAfterDelay()
@@ -105,8 +104,10 @@ public class GhostBull : Ghost
         lockedIn = true;
         curState = State.prepare;
         rigid2d.velocity = Vector2.zero;
+        AudioManager.Instance.PlaySFXClone(AudioManager.Instance.ghostSfx);
 
         yield return new WaitForSeconds(ChaseDelay);
+
 
         return_timer = 0;
 
@@ -119,7 +120,9 @@ public class GhostBull : Ghost
         if (return_timer >= return_time)
         {
             if (disable_on_return)
+            {
                 gameObject.SetActive(false);
+            }
             else
                 ReturnToOrigin();
         }

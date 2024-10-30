@@ -43,6 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1239085382199289651, guid: 1f5954d365d731547985e901f4eb2f78, type: 2}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -179,26 +180,30 @@ MonoBehaviour:
   musicSource: {fileID: 579321607855361387}
   ambientSource: {fileID: 4009720901657387322}
   sfxSource: {fileID: 7799966030440228392}
-  music_Bg: {fileID: 8300000, guid: 08297218a0604554c9d9d85ea0430ce1, type: 3}
-  ambient_Horror: {fileID: 8300000, guid: 98a19acae94b5ea4a94802a6dbbcfb6b, type: 3}
-  pickUp_sfx: {fileID: 8300000, guid: d9cc10ee23b8d714492a81d622ac8838, type: 3}
-  pickUpWrong_sfx: {fileID: 8300000, guid: a16c3eb1df680884d892984093ec56ab, type: 3}
-  interact_sfx: {fileID: 8300000, guid: d9cc10ee23b8d714492a81d622ac8838, type: 3}
-  interactWrong_sfx: {fileID: 8300000, guid: 2c321e3d9a844db4884d481fe061ffe0, type: 3}
-  enterDoor_sfx: {fileID: 8300000, guid: 0b73f905347126a49b02e60e5264ddab, type: 3}
-  closeDoor_sfx: {fileID: 8300000, guid: 2da476f9f97da2d4cbf07286c7ca0f71, type: 3}
-  ghost_sfx: {fileID: 0}
-  jump_sfx: {fileID: 0}
-  hide_sfx: {fileID: 0}
-  walking_sfx:
+  musicBg: {fileID: 8300000, guid: 08297218a0604554c9d9d85ea0430ce1, type: 3}
+  combatBg: {fileID: 8300000, guid: 112abfe7586fb10459a91bcf903e8df2, type: 3}
+  introBossRoomBg: {fileID: 8300000, guid: e7d835ccf909e3d49a2d229b00253d71, type: 3}
+  bossRoomBg: {fileID: 8300000, guid: b42e8a8f150f9424b97085db41a168a0, type: 3}
+  hidingSfx: {fileID: 8300000, guid: c3aa1788e178eff4da2b01bb3f08edb3, type: 3}
+  ambientHorror: {fileID: 8300000, guid: 98a19acae94b5ea4a94802a6dbbcfb6b, type: 3}
+  pickUpSfx: {fileID: 8300000, guid: ca3fb49566525ad408db6a3cd3f13b56, type: 3}
+  pickUpWrongSfx: {fileID: 8300000, guid: a16c3eb1df680884d892984093ec56ab, type: 3}
+  interactSfx: {fileID: 8300000, guid: d9cc10ee23b8d714492a81d622ac8838, type: 3}
+  interactWrongSfx: {fileID: 8300000, guid: 2c321e3d9a844db4884d481fe061ffe0, type: 3}
+  enterDoorSfx: {fileID: 8300000, guid: 2da476f9f97da2d4cbf07286c7ca0f71, type: 3}
+  closeDoorSfx: {fileID: 8300000, guid: 0b73f905347126a49b02e60e5264ddab, type: 3}
+  ghostSfx: {fileID: 8300000, guid: db97a08d1771b6143a7654f054f0d838, type: 3}
+  damageSfx: {fileID: 8300000, guid: 55a517268590e7640851c8107d63825b, type: 3}
+  hittingSfx: {fileID: 8300000, guid: 2e961d9b18089304692be7ab1a0ea5c1, type: 3}
+  walkingSfx:
   - {fileID: 8300000, guid: f2ca662f9aa5df547aa07530be940d2e, type: 3}
   - {fileID: 8300000, guid: 887e4f34afd5e6d4392aa0299dbe85b5, type: 3}
-  minTimeBetween: 0.3
-  maxTimeBetween: 0.4
-  minPitch: 0.8
+  minPitch: 0.7
   maxPitch: 1.2
   fadeOutDuration: 0.5
   fadeInDuration: 0.5
+  minTimeBetweenSteps: 0.3
+  maxTimeBetweenSteps: 0.6
 --- !u!1 &8378100414635023576
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +247,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5457120347255825136, guid: 1f5954d365d731547985e901f4eb2f78, type: 2}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -370,6 +376,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4596037890028054530, guid: 1f5954d365d731547985e901f4eb2f78, type: 2}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -466,6 +473,10 @@ PrefabInstance:
     - target: {fileID: 53019944791726786, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
       propertyPath: m_Name
       value: SettingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 66818485137530776, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 372317828408960856, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -643,8 +654,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2360928989428640171, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 2665663944277331244, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
       propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665663944277331244, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2792897849442193964, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
@@ -711,6 +730,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5077694075712828104, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 5708661342796944739, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -734,6 +757,14 @@ PrefabInstance:
     - target: {fileID: 5747141156820025259, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965556900248627320, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6112611496167937401, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 6841836132008927858, guid: 90adda4f698d50a47ae8223211e1d3dc, type: 3}
       propertyPath: m_AnchorMax.y

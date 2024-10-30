@@ -4,7 +4,6 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 namespace Daggoot
 {
     public class SettingsManager : MonoBehaviour
@@ -23,10 +22,19 @@ namespace Daggoot
         {
             _animator = settingPanel.GetComponent<Animator>();
             _animator.enabled = false;
-            if (PlayerPrefs.HasKey("musicVolume") || PlayerPrefs.HasKey("sfxVolume"))
-            {
-                LoadVolume();
-            }
+
+            // Load saved volume preferences
+            LoadVolume();
+
+            // Initialize volumes
+            SetMusicVolume();
+            SetAmbientVolume();
+            SetSFXVolume();
+
+            // Add listeners to update volume as sliders change
+            musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
+            ambientSlider.onValueChanged.AddListener(delegate { SetAmbientVolume(); });
+            sfxSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
         }
 
         private void Update()
@@ -62,9 +70,9 @@ namespace Daggoot
         public void LoadVolume()
         {
             Debug.Log("Loading volume");
-            musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-            ambientSlider.value = PlayerPrefs.GetFloat("ambientVolume");
-            sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+            musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);  // Default volume 0.5
+            ambientSlider.value = PlayerPrefs.GetFloat("ambientVolume", 0.5f);
+            sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
         }
 
         public void RestartLevel()
@@ -87,6 +95,7 @@ namespace Daggoot
         public void OpenSettingsPanel()
         {
             settingPanel.SetActive(true);
+            SetInteractable(true); // Enable interactions
             _animator.enabled = true;
             _animator.Play("Open_setting_UI_anim");
             isPanelOpen = true;
@@ -94,8 +103,17 @@ namespace Daggoot
 
         public void CloseSettingsPanel()
         {
+            SetInteractable(false); // Disable interactions while closing
             _animator.Play("Close_Setting_ui_anim");
             StartCoroutine(DeactivatePanelAfterAnimation());
+        }
+
+        private void SetInteractable(bool state)
+        {
+            musicSlider.interactable = state;
+            ambientSlider.interactable = state;
+            sfxSlider.interactable = state;
+            // Add other UI elements as needed
         }
 
         private IEnumerator DeactivatePanelAfterAnimation()
@@ -109,8 +127,8 @@ namespace Daggoot
         public void Resume()
         {
             CloseSettingsPanel();
+            // Optionally restore gameplay controls or reset time scale here if needed
+            // Example: Time.timeScale = 1f;
         }
     }
-
 }
-

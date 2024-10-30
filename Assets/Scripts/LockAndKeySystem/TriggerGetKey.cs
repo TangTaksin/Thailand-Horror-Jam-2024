@@ -26,6 +26,7 @@ public class TriggerGetKey : MonoBehaviour, IInteractable
             // Check if the player has all the required keys
             if (PlayerHasAllRequiredKeys())
             {
+                AudioManager.Instance.PlaySFXClone(AudioManager.Instance.pickUpSfx);
                 // Give the key to the player
                 PlayerInventory.instance.AddKey(keyToGive);
                 // Highlight keyToGive in red
@@ -39,6 +40,7 @@ public class TriggerGetKey : MonoBehaviour, IInteractable
                 // Inform the player of the missing keys
                 string missingKeys = GetMissingKeys();
                 feedbackManager.ShowFeedback("ต้องการ <color=red>" + missingKeys + "</color> เพื่อดำเนินการต่อ."); // "You need <keys> to proceed."
+                AudioManager.Instance.PlaySFXClone(AudioManager.Instance.interactWrongSfx);
             }
         }
     }
