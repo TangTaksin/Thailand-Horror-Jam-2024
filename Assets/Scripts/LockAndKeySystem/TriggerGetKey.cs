@@ -6,6 +6,7 @@ public class TriggerGetKey : MonoBehaviour, IInteractable
     public string[] requiredKeys; // The keys required to trigger the event
     public string keyToGive = "Key B"; // The key to give if the player has all the required keys
     public FeedbackManager feedbackManager; // Reference to the FeedbackManager
+    public GameObject hint;
 
     public Vector3 position => transform.position; // Expression-bodied member for simplicity
 
@@ -29,6 +30,9 @@ public class TriggerGetKey : MonoBehaviour, IInteractable
                 AudioManager.Instance.PlaySFXClone(AudioManager.Instance.pickUpSfx);
                 // Give the key to the player
                 PlayerInventory.instance.AddKey(keyToGive);
+
+                //hide hint
+                hint.gameObject.SetActive(false);
                 // Highlight keyToGive in red
                 feedbackManager.ShowFeedback("คุณได้รับ <color=red>" + keyToGive + "</color> !"); // "You have been given <key>!"
 
